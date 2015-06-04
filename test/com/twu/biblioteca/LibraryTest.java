@@ -29,4 +29,17 @@ public class LibraryTest {
 
         assertThat(actualBookCount, is(equalTo(3)));
     }
+
+    @Test
+    public void checkingOutABookFromLibraryShouldRemoveItFromAvailableBooks() {
+        Library library = new Library();
+        library.addBook("Refactoring Practices", "Martin Flower", 2004);
+        library.addBook("Physics", "Kip Thorne", 2010);
+        library.addBook("Algorithms", "Cormen", 2001);
+
+        library.checkOutBook("Algorithms");
+        boolean isCheckedOutBookAvailableInLibrary = library.isInLibrary("Algorithms");
+
+        assertThat(isCheckedOutBookAvailableInLibrary, is(equalTo(false)));
+    }
 }
