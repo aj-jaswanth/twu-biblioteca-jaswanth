@@ -50,9 +50,20 @@ public class LibraryTest {
 
         library.checkOutBook("Algorithms");
         boolean isCheckedOutBookAvailableInLibrary = library.isInLibrary("Algorithms");
-        String actualResponse = outputStream.toString();
 
         assertThat(isCheckedOutBookAvailableInLibrary, is(equalTo(false)));
+    }
+
+    @Test
+    public void checkingOutAnAvailableBookFromLibraryShouldPrintThankYou() {
+        Library library = new Library();
+        library.addBook("Refactoring Practices", "Martin Fowler", 2004);
+        library.addBook("Physics", "Kip Thorne", 2010);
+        library.addBook("Algorithms", "Cormen", 2001);
+
+        library.checkOutBook("Algorithms");
+        String actualResponse = outputStream.toString();
+
         assertThat(actualResponse, equalTo("Thank you! Enjoy the book\n"));
     }
 
