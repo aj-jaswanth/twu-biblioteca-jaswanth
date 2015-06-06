@@ -19,6 +19,15 @@ public class BookTest {
     }
 
     @Test
+    public void shouldReturnFalseWhenOtherObjectIsPassed() {
+        Book firstBook = new Book("Algorithms", "Cormen", 2014);
+
+        boolean actualEquality = firstBook.equals("");
+
+        assertThat(actualEquality, is(equalTo(false)));
+    }
+
+    @Test
     public void reflexivePropertyOfEquality() {
         Book firstBook = new Book("Algorithms", "Cormen", 2014);
 
