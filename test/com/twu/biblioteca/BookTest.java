@@ -62,4 +62,14 @@ public class BookTest {
 
         assertThat(twoBooksAreEqualThenHashCodesAreSame, is(equalTo(true)));
     }
+
+    @Test
+    public void ifTwoBooksAreNotEqualThenTheirHashCodesAreNotSame() {
+        Book firstBook = new Book("Algorithms", "Cormen", 2014);
+        Book secondBook = new Book("Operating Systems", "Galvin", 2014);
+
+        boolean twoBooksAreEqualThenHashCodesAreSame = firstBook.equals(secondBook) && (firstBook.hashCode() == secondBook.hashCode());
+
+        assertThat(twoBooksAreEqualThenHashCodesAreSame, is(equalTo(false)));
+    }
 }
