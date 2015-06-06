@@ -12,6 +12,11 @@ public class Book {
     }
 
     @Override
+    public String toString() {
+        return (name + " " + author + " " + yearOfPublication);
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o)
             return true;
