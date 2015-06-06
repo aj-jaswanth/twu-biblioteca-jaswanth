@@ -8,6 +8,16 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
 public class BookTest {
+
+    @Test
+    public void shouldReturnFalseWhenNullIsPassed() {
+        Book firstBook = new Book("Algorithms", "Cormen", 2014);
+
+        boolean actualEquality = firstBook.equals(null);
+
+        assertThat(actualEquality, is(equalTo(false)));
+    }
+
     @Test
     public void reflexivePropertyOfEquality() {
         Book firstBook = new Book("Algorithms", "Cormen", 2014);
