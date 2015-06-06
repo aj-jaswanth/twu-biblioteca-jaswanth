@@ -3,7 +3,6 @@ package com.twu.biblioteca;
 import java.util.Scanner;
 
 public class MainMenu {
-
     private String[] options;
 
     public MainMenu(String[] options) {
@@ -17,16 +16,15 @@ public class MainMenu {
     public void displayOptions() {
         for (int index = 0; index < options.length; index++)
             System.out.println((index + 1) + ". " + options[index]);
-        System.out.println("Select an option : ");
     }
 
     public int selectedOption() {
         Scanner input = new Scanner(System.in);
+        System.out.println("Select an option : ");
         int selectedOption = input.nextInt();
-        if (0 < selectedOption && selectedOption < totalAvailableOptions() == false) {
-            System.out.println("Select a valid option!");
-            return -1;
-        }
-        return selectedOption;
+        if (0 < selectedOption && selectedOption < totalAvailableOptions())
+            return selectedOption;
+        System.out.println("Select a valid option!");
+        return -1;
     }
 }

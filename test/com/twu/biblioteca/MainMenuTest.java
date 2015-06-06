@@ -48,7 +48,30 @@ public class MainMenuTest {
         mainMenu.selectedOption();
         String actualResponse = outputStream.toString();
 
-        assertThat(actualResponse, startsWith("Select a valid option!"));
+        assertThat(actualResponse, endsWith("Select a valid option!\n"));
+    }
+
+    @Test
+    public void shouldReturnMinusOneWhenInvalidOptionIsSelected() {
+        MainMenu mainMenu = new MainMenu(new String[]{"List Books", "Quit"});
+        ByteArrayInputStream inputStream = new ByteArrayInputStream("3".getBytes());
+        System.setIn(inputStream);
+
+        int actualSelectedOption = mainMenu.selectedOption();
+
+        assertThat(actualSelectedOption, is(equalTo(-1)));
+    }
+
+
+    @Test
+    public void shouldReturnSelectedOptionNumberWhenAValidOptionIsSelected() {
+        MainMenu mainMenu = new MainMenu(new String[]{"List Books", "Quit"});
+        ByteArrayInputStream inputStream = new ByteArrayInputStream("1".getBytes());
+        System.setIn(inputStream);
+
+        int actualSelectedOption = mainMenu.selectedOption();
+
+        assertThat(actualSelectedOption, is(equalTo(1)));
     }
 
     @After
