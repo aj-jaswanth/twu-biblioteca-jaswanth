@@ -16,7 +16,7 @@ public class LibraryTest {
     private final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 
     @Before
-    public void setUpStream() {
+    public void setUp() {
         System.setOut(new PrintStream(outputStream));
     }
 
@@ -32,19 +32,19 @@ public class LibraryTest {
     @Test
     public void threeBooksAreAvailableInLibrary() {
         Library library = new Library();
-        library.addBook("Refactoring Practices", "Martin Flower", 2004);
+        library.addBook("Refactoring Practices", "Martin Fowler", 2004);
         library.addBook("Physics", "Kip Thorne", 2010);
         library.addBook("Alogrithms", "Cormen", 2001);
 
-        int actualBookCount = library.availableBooksCount();
+        int actualBooksCount = library.availableBooksCount();
 
-        assertThat(actualBookCount, is(equalTo(3)));
+        assertThat(actualBooksCount, is(equalTo(3)));
     }
 
     @Test
-    public void checkingOutABookFromLibraryShouldRemoveItFromAvailableBooks() {
+    public void checkingOutAnAvailableBookFromLibraryShouldRemoveItFromAvailableBooks() {
         Library library = new Library();
-        library.addBook("Refactoring Practices", "Martin Flower", 2004);
+        library.addBook("Refactoring Practices", "Martin Fowler", 2004);
         library.addBook("Physics", "Kip Thorne", 2010);
         library.addBook("Algorithms", "Cormen", 2001);
 
@@ -70,7 +70,7 @@ public class LibraryTest {
     @Test
     public void checkingOutAnUnavailableBookShouldPrintBookNotAvailable() {
         Library library = new Library();
-        library.addBook("Refactoring Practices", "Martin Flower", 2004);
+        library.addBook("Refactoring Practices", "Martin Fowler", 2004);
         library.addBook("Physics", "Kip Thorne", 2010);
         library.addBook("Algorithms", "Cormen", 2001);
 
@@ -81,7 +81,7 @@ public class LibraryTest {
     }
 
     @After
-    public void cleanUpStreams() {
+    public void tearDown() {
         System.setIn(null);
         System.setOut(null);
     }
