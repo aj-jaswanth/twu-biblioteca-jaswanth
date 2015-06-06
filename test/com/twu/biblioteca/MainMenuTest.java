@@ -16,12 +16,12 @@ public class MainMenuTest {
     private final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 
     @Before
-    public void setUpStream() {
+    public void setUp() {
         System.setOut(new PrintStream(outputStream));
     }
 
     @Test
-    public void totalAvailableOptionShouldBeTwo() {
+    public void totalAvailableOptionsShouldBeTwo() {
         MainMenu mainMenu = new MainMenu(new String[]{"List books", "Quit"});
 
         int actualTotalAvailableOptions = mainMenu.totalAvailableOptions();
@@ -52,7 +52,7 @@ public class MainMenuTest {
     }
 
     @After
-    public void cleanUpStream() {
+    public void tearDown() {
         System.setOut(null);
         System.setIn(null);
     }
