@@ -21,16 +21,7 @@ public class MainMenuTest {
     }
 
     @Test
-    public void totalAvailableOptionsShouldBeTwo() {
-        MainMenu mainMenu = new MainMenu(new String[]{"List books", "Quit"});
-
-        int actualTotalAvailableOptions = mainMenu.totalAvailableOptions();
-
-        assertThat(actualTotalAvailableOptions, is(equalTo(2)));
-    }
-
-    @Test
-    public void displayListOfOptions() {
+    public void shouldDisplayListOfOptions() {
         MainMenu mainMenu = new MainMenu(new String[]{"List Books", "Quit"});
 
         mainMenu.displayOptions();
