@@ -32,9 +32,9 @@ public class MainMenuTest {
 
     @Test
     public void shouldDisplayInvalidMessageWhenInvalidOptionIsSelected() {
-        MainMenu mainMenu = new MainMenu(new String[]{"List Books", "Quit"});
         ByteArrayInputStream inputStream = new ByteArrayInputStream("3".getBytes());
         System.setIn(inputStream);
+        MainMenu mainMenu = new MainMenu(new String[]{"List Books", "Quit"});
 
         mainMenu.selectedOption();
         String actualResponse = outputStream.toString();
@@ -44,9 +44,9 @@ public class MainMenuTest {
 
     @Test
     public void shouldReturnMinusOneWhenInvalidOptionIsSelected() {
-        MainMenu mainMenu = new MainMenu(new String[]{"List Books", "Quit"});
         ByteArrayInputStream inputStream = new ByteArrayInputStream("3".getBytes());
         System.setIn(inputStream);
+        MainMenu mainMenu = new MainMenu(new String[]{"List Books", "Quit"});
 
         int actualSelectedOption = mainMenu.selectedOption();
 
@@ -56,9 +56,9 @@ public class MainMenuTest {
 
     @Test
     public void shouldReturnSelectedOptionNumberWhenAValidOptionIsSelected() {
-        MainMenu mainMenu = new MainMenu(new String[]{"List Books", "Quit"});
         ByteArrayInputStream inputStream = new ByteArrayInputStream("1".getBytes());
         System.setIn(inputStream);
+        MainMenu mainMenu = new MainMenu(new String[]{"List Books", "Quit"});
 
         int actualSelectedOption = mainMenu.selectedOption();
 
@@ -68,6 +68,6 @@ public class MainMenuTest {
     @After
     public void tearDown() {
         System.setOut(null);
-        System.setIn(null);
+        System.setIn(System.in);
     }
 }

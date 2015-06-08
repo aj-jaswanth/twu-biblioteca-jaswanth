@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 public class MainMenu {
     private String[] options;
+    Scanner input = new Scanner(System.in);
 
     public MainMenu(String[] options) {
         this.options = options;
@@ -15,8 +16,7 @@ public class MainMenu {
     }
 
     public int selectedOption() {
-        Scanner input = new Scanner(System.in);
-        System.out.println("Select an option : ");
+        System.out.print("Select an option : ");
         int selectedOption = input.nextInt();
         if (0 < selectedOption && selectedOption <= options.length)
             return selectedOption;
