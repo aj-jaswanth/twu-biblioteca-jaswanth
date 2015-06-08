@@ -33,7 +33,6 @@ public class LibraryTest {
 
     @After
     public void tearDown() {
-        System.setIn(null);
         System.setOut(null);
     }
 }
