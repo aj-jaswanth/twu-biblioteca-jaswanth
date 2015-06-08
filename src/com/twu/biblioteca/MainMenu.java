@@ -3,8 +3,8 @@ package com.twu.biblioteca;
 import java.util.Scanner;
 
 public class MainMenu {
-    private String[] options;
     Scanner input = new Scanner(System.in);
+    private String[] options;
 
     public MainMenu(String[] options) {
         this.options = options;
