@@ -8,9 +8,7 @@ import org.junit.Test;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertEquals;
 
 public class LibraryTest {
     private final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
@@ -21,64 +19,17 @@ public class LibraryTest {
     }
 
     @Test
-    public void noBookIsAvailableInLibrary() {
+    public void addingANewBookToLibraryShouldDisplayItInAvailableListR() {
         Library library = new Library();
 
-        int actualBookCount = library.availableBooksCount();
+        library.addBook(new Book("Refactoring", "Martin", 2005));
+        library.displayAvailableBooks();
+        String actualBooksList = outputStream.toString();
 
-        assertThat(actualBookCount, is(equalTo(0)));
+        assertEquals(actualBooksList, "1 Algorithms Cormen 2014\n2 Physics Michio 2009\n" +
+                "3 C Dennis 1982\n4 Refactoring Martin 2005\n");
     }
 
-    @Test
-    public void threeBooksAreAvailableInLibrary() {
-        Library library = new Library();
-        library.addBook("Refactoring Practices", "Martin Fowler", 2004);
-        library.addBook("Physics", "Kip Thorne", 2010);
-        library.addBook("Alogrithms", "Cormen", 2001);
-
-        int actualBooksCount = library.availableBooksCount();
-
-        assertThat(actualBooksCount, is(equalTo(3)));
-    }
-
-    @Test
-    public void checkingOutAnAvailableBookFromLibraryShouldRemoveItFromAvailableBooks() {
-        Library library = new Library();
-        library.addBook("Refactoring Practices", "Martin Fowler", 2004);
-        library.addBook("Physics", "Kip Thorne", 2010);
-        library.addBook("Algorithms", "Cormen", 2001);
-
-        library.checkOutBook("Algorithms");
-        boolean isCheckedOutBookAvailableInLibrary = library.isInLibrary("Algorithms");
-
-        assertThat(isCheckedOutBookAvailableInLibrary, is(equalTo(false)));
-    }
-
-    @Test
-    public void checkingOutAnAvailableBookFromLibraryShouldPrintThankYou() {
-        Library library = new Library();
-        library.addBook("Refactoring Practices", "Martin Fowler", 2004);
-        library.addBook("Physics", "Kip Thorne", 2010);
-        library.addBook("Algorithms", "Cormen", 2001);
-
-        library.checkOutBook("Algorithms");
-        String actualResponse = outputStream.toString();
-
-        assertThat(actualResponse, equalTo("Thank you! Enjoy the book\n"));
-    }
-
-    @Test
-    public void checkingOutAnUnavailableBookShouldPrintBookNotAvailable() {
-        Library library = new Library();
-        library.addBook("Refactoring Practices", "Martin Fowler", 2004);
-        library.addBook("Physics", "Kip Thorne", 2010);
-        library.addBook("Algorithms", "Cormen", 2001);
-
-        library.checkOutBook("Mathematics");
-        String actualResponse = outputStream.toString();
-
-        assertThat(actualResponse, equalTo("That book is not available!\n"));
-    }
 
     @After
     public void tearDown() {
