@@ -7,6 +7,12 @@ public class Library {
     private ArrayList<Book> availableBooks = new ArrayList<Book>();
     private ArrayList<Book> checkedOutBooks = new ArrayList<Book>();
 
+    public Library() {
+        availableBooks.add(new Book("Algorithms", "Cormen", 2014));
+        availableBooks.add(new Book("Physics", "Michio", 2009));
+        availableBooks.add(new Book("C", "Dennis", 1982));
+    }
+
     public void addBook(Book book) {
         availableBooks.add(book);
     }
@@ -20,6 +26,7 @@ public class Library {
         if (0 < bookIndex && bookIndex <= availableBooks.size()) {
             checkedOutBooks.add(availableBooks.get(bookIndex - 1));
             availableBooks.remove(bookIndex - 1);
+            System.out.println("Thank you! Enjoy the book");
         }
     }
 }

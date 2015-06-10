@@ -20,9 +20,6 @@ public class LibraryTest {
     @Test
     public void addingANewBookToLibraryShouldDisplayItInAvailableList() {
         Library library = new Library();
-        library.addBook(new Book("Algorithms", "Cormen", 2014));
-        library.addBook(new Book("Physics", "Michio", 2009));
-        library.addBook(new Book("C", "Dennis", 1982));
         library.addBook(new Book("Refactoring", "Martin", 2005));
 
         library.displayAvailableBooks();
@@ -35,13 +32,25 @@ public class LibraryTest {
     @Test
     public void checkedOutBookShouldNotBeAvailableInLibrary() {
         Library library = new Library();
-        library.addBook(new Book("Algorithms", "Cormen", 2014));
 
         library.checkout(1);
+        outputStream.reset();
         library.displayAvailableBooks();
         String actualBooksList = outputStream.toString();
 
-        assertEquals("", actualBooksList);
+        assertEquals("1 Physics Michio 2009\n" +
+                "2 C Dennis 1982\n", actualBooksList);
+    }
+
+    @Test
+    public void shouldPrintMessageOnSuccessfulCheckoutOfABook() {
+        Library library = new Library();
+        library.addBook(new Book("Algorithms", "Cormen", 2014));
+
+        library.checkout(1);
+        String actualOutput = outputStream.toString();
+
+        assertEquals("Thank you! Enjoy the book\n", actualOutput);
     }
 
     @After
