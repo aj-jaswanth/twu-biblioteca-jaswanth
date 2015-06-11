@@ -27,6 +27,7 @@ public class Library {
             checkedOutBooks.add(availableBooks.get(bookIndex - 1));
             availableBooks.remove(bookIndex - 1);
             System.out.println("Thank you! Enjoy the book");
-        }
+        } else
+            System.out.println("That book is not available");
     }
 }

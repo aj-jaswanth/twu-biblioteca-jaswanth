@@ -39,26 +39,26 @@ public class BibliotecaTest {
 
         int actualSelectedOption = biblioteca.getOptionFromUser();
 
-        assertThat(actualSelectedOption, is(equalTo(2)));
+        assertThat(actualSelectedOption, is(equalTo(3)));
     }
 
     @Test
     public void shouldStartBibliotecaAndDisplayBooksIfSelected() {
-        ByteArrayInputStream inputStream = new ByteArrayInputStream("1\n2\n".getBytes());
+        ByteArrayInputStream inputStream = new ByteArrayInputStream("1\n3\n".getBytes());
         System.setIn(inputStream);
         Biblioteca biblioteca = new Biblioteca();
 
         biblioteca.start();
         String actualOutput = outputStream.toString();
 
-        assertThat(actualOutput, is(equalTo("Bengaluru public library welcomes you!\n1. List Books\n2. Quit" +
+        assertThat(actualOutput, is(equalTo("Bengaluru public library welcomes you!\n1. List Books\n2. Check Out\n3. Quit" +
                 "\nSelect an option : 1 Algorithms Cormen 2014\n" +
-                "2 Physics Michio 2009\n3 C Dennis 1982\n1. List Books\n2. Quit\nSelect an option : ")));
+                "2 Physics Michio 2009\n3 C Dennis 1982\n1. List Books\n2. Check Out\n3. Quit\nSelect an option : ")));
     }
 
     @Test
     public void shouldStartBibliotecaAndQuitIfSelected() {
-        ByteArrayInputStream inputStream = new ByteArrayInputStream("2".getBytes());
+        ByteArrayInputStream inputStream = new ByteArrayInputStream("3".getBytes());
         System.setIn(inputStream);
         Biblioteca biblioteca = new Biblioteca();
 
@@ -66,7 +66,7 @@ public class BibliotecaTest {
         String actualOutput = outputStream.toString();
 
         assertThat(actualOutput, is(equalTo("Bengaluru public library welcomes you!\n" +
-                "1. List Books\n2. Quit\nSelect an option : ")));
+                "1. List Books\n2. Check Out\n3. Quit\nSelect an option : ")));
     }
 
     @After

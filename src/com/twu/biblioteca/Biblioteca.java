@@ -1,16 +1,23 @@
 package com.twu.biblioteca;
 
+import java.util.Scanner;
+
 public class Biblioteca {
 
-    private MainMenu mainMenu = new MainMenu(new String[]{"List Books", "Quit"});
+    private MainMenu mainMenu = new MainMenu(new String[]{"List Books", "Check Out", "Quit"});
     private Library library = new Library();
+    private Scanner scanner = new Scanner(System.in);
 
     public void start() {
         welcomeUser();
         while (true) {
-            if (getOptionFromUser() == 1)
+            int optionSelectedByUser = getOptionFromUser();
+            if (optionSelectedByUser == 1)
                 library.displayAvailableBooks();
-            else
+            else if (optionSelectedByUser == 2) {
+                System.out.print("Enter book ID : ");
+                library.checkout(scanner.nextInt());
+            } else
                 return;
         }
     }

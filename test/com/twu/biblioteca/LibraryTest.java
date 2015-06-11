@@ -53,6 +53,17 @@ public class LibraryTest {
         assertEquals("Thank you! Enjoy the book\n", actualOutput);
     }
 
+    @Test
+    public void shouldPrintMessageOnUnsuccessfulCheckoutOfABook() {
+        Library library = new Library();
+        library.addBook(new Book("Algorithms", "Cormen", 2014));
+
+        library.checkout(5);
+        String actualOutput = outputStream.toString();
+
+        assertEquals("That book is not available\n", actualOutput);
+    }
+
     @After
     public void tearDown() {
         System.setOut(null);
