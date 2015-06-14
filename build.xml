@@ -40,7 +40,7 @@
         <mkdir dir="out/jar"/>
         <jar destfile="out/jar/twu_biblioteca.jar" basedir="out/src/classes">
             <manifest>
-                <attribute name="Main-Class" value="com.twu.biblioteca"/>
+                <attribute name="Main-Class" value="com.twu.app"/>
             </manifest>
         </jar>
     </target>

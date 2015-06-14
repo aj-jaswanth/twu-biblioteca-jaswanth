@@ -7,6 +7,7 @@ import org.junit.Test;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.util.Scanner;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.assertThat;
@@ -22,7 +23,8 @@ public class MainMenuTest {
 
     @Test
     public void shouldDisplayListOfOptions() {
-        MainMenu mainMenu = new MainMenu(new String[]{"List Books", "Quit"});
+        View view = new View(null);
+        MainMenu mainMenu = new MainMenu(new String[]{"List Books", "Quit"}, view);
 
         mainMenu.displayOptions();
         String actualOutput = outputStream.toString();
@@ -33,8 +35,8 @@ public class MainMenuTest {
     @Test
     public void shouldDisplayInvalidMessageWhenInvalidOptionIsSelected() {
         ByteArrayInputStream inputStream = new ByteArrayInputStream("3".getBytes());
-        System.setIn(inputStream);
-        MainMenu mainMenu = new MainMenu(new String[]{"List Books", "Quit"});
+        View view = new View(new Scanner(inputStream));
+        MainMenu mainMenu = new MainMenu(new String[]{"List Books", "Quit"}, view);
 
         mainMenu.selectedOption();
         String actualResponse = outputStream.toString();
@@ -45,8 +47,8 @@ public class MainMenuTest {
     @Test
     public void shouldReturnMinusOneWhenInvalidOptionIsSelected() {
         ByteArrayInputStream inputStream = new ByteArrayInputStream("3".getBytes());
-        System.setIn(inputStream);
-        MainMenu mainMenu = new MainMenu(new String[]{"List Books", "Quit"});
+        View view = new View(new Scanner(inputStream));
+        MainMenu mainMenu = new MainMenu(new String[]{"List Books", "Quit"}, view);
 
         int actualSelectedOption = mainMenu.selectedOption();
 
@@ -57,8 +59,8 @@ public class MainMenuTest {
     @Test
     public void shouldReturnSelectedOptionNumberWhenAValidOptionIsSelected() {
         ByteArrayInputStream inputStream = new ByteArrayInputStream("1".getBytes());
-        System.setIn(inputStream);
-        MainMenu mainMenu = new MainMenu(new String[]{"List Books", "Quit"});
+        View view = new View(new Scanner(inputStream));
+        MainMenu mainMenu = new MainMenu(new String[]{"List Books", "Quit"}, view);
 
         int actualSelectedOption = mainMenu.selectedOption();
 

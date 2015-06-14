@@ -3,24 +3,26 @@ package com.twu.biblioteca;
 import java.util.Scanner;
 
 public class MainMenu {
-    Scanner input = new Scanner(System.in);
+    private Scanner scanner;
     private String[] options;
+    private View view;
 
-    public MainMenu(String[] options) {
+    public MainMenu(String[] options, View view) {
         this.options = options;
+        this.view = view;
     }
 
     public void displayOptions() {
         for (int index = 0; index < options.length; index++)
-            System.out.println((index + 1) + ". " + options[index]);
+            view.display((index + 1) + ". " + options[index]);
     }
 
     public int selectedOption() {
-        System.out.print(Messages.MENU_SELECT_PROMPT);
-        int selectedOption = input.nextInt();
+        view.display(Messages.MENU_SELECT_PROMPT);
+        int selectedOption = view.readInteger();
         if (0 < selectedOption && selectedOption <= options.length)
             return selectedOption;
-        System.out.println(Messages.MENU_SELECT_INVALID);
+        view.display(Messages.MENU_SELECT_INVALID);
         return -1;
     }
 }

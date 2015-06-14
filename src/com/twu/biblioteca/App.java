@@ -1,32 +1,36 @@
 package com.twu.biblioteca;
 
-import java.util.Scanner;
+public class App {
 
-public class Biblioteca {
+    private MainMenu mainMenu;
+    private Library library;
+    private View view;
 
-    private MainMenu mainMenu = new MainMenu(new String[]{Messages.LIST_BOOKS, Messages.CHECK_OUT, Messages.QUIT});
-    private Library library = new Library();
-    private Scanner scanner = new Scanner(System.in);
+    public App(MainMenu mainMenu, Library library, View view) {
+        this.mainMenu = mainMenu;
+        this.library = library;
+        this.view = view;
+    }
 
     public void start() {
         welcomeUser();
         while (true) {
-            int optionSelectedByUser = getOptionFromUser();
+            int optionSelectedByUser = getUserOption();
             if (optionSelectedByUser == 1)
                 library.displayAvailableBooks();
             else if (optionSelectedByUser == 2) {
                 System.out.print(Messages.CHECK_OUT_PROMPT);
-                library.checkout(scanner.nextInt());
+                library.checkout(view.readInteger());
             } else
                 return;
         }
     }
 
     public void welcomeUser() {
-        System.out.println(Messages.WELCOME_MESSAGE);
+        view.display(Messages.WELCOME_MESSAGE);
     }
 
-    public int getOptionFromUser() {
+    public int getUserOption() {
         int selectedOption;
         while (true) {
             mainMenu.displayOptions();
