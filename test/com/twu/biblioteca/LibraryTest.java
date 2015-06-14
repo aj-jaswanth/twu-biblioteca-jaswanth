@@ -35,7 +35,7 @@ public class LibraryTest {
     public void checkedOutBookShouldNotBeAvailableInLibrary() {
         Library library = new Library(view);
 
-        library.checkout(1);
+        library.checkout("Algorithms");
         library.displayAvailableBooks();
         String actualBooksList = outputStream.toString();
 
@@ -46,9 +46,8 @@ public class LibraryTest {
     @Test
     public void shouldPrintMessageOnSuccessfulCheckoutOfABook() {
         Library library = new Library(view);
-        library.addBook(new Book("Algorithms", "Cormen", 2014));
 
-        library.checkout(1);
+        library.checkout("Algorithms");
         String actualOutput = outputStream.toString();
 
         assertEquals("Thank you! Enjoy the book\n", actualOutput);
@@ -59,7 +58,7 @@ public class LibraryTest {
         Library library = new Library(view);
         library.addBook(new Book("Algorithms", "Cormen", 2014));
 
-        library.checkout(5);
+        library.checkout("Apple Mac");
         String actualOutput = outputStream.toString();
 
         assertEquals("That book is not available\n", actualOutput);
@@ -68,9 +67,9 @@ public class LibraryTest {
     @Test
     public void returnedBookShouldNotBeInCheckedOutBooks() {
         Library library = new Library(view);
-        library.checkout(1);
-        library.returnBook(1);
-        library.returnBook(1);
+        library.checkout("C");
+        library.returnBook("C");
+        library.returnBook("C");
 
         String actualOutput = outputStream.toString();
 

@@ -1,9 +1,6 @@
 package com.twu.biblioteca;
 
-import java.util.Scanner;
-
 public class MainMenu {
-    private Scanner scanner;
     private String[] options;
     private View view;
 

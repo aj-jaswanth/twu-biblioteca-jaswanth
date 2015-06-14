@@ -28,6 +28,16 @@ public class ViewTest {
         assertEquals(23, inputInteger);
     }
 
+    @Test
+    public void shouldTakeStringInput() {
+        ByteArrayInputStream inputStream = new ByteArrayInputStream("abcd\n".getBytes());
+        View view = new View(new Scanner(inputStream));
+
+        String actualString = view.readLine();
+
+        assertEquals("abcd", actualString);
+    }
+
     @After
     public void tearDown() {
         System.setOut(null);

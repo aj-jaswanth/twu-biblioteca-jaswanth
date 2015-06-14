@@ -11,6 +11,7 @@ import java.util.Scanner;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.*;
 
@@ -52,6 +53,33 @@ public class AppTest {
         assertThat(actualSelectedOption, is(equalTo(3)));
     }
 
+
+    @Test
+    public void shouldAskForOptionAgainIfUserSelectsInvalidOption() {
+        ByteArrayInputStream inputStream = new ByteArrayInputStream("10\n4\n".getBytes());
+        Scanner scanner = new Scanner(inputStream);
+        View view = new View(scanner);
+        MainMenu mainMenu = new MainMenu(new String[]{Messages.LIST_BOOKS,
+                Messages.CHECK_OUT, Messages.RETURN_BOOK, Messages.QUIT}, view);
+        Library library = new Library(view);
+        app = new App(mainMenu, library, view);
+
+        app.getUserOption();
+        String actualResult = outputStream.toString();
+
+        assertEquals("1. List Books\n" +
+                "2. Check Out\n" +
+                "3. Return Book\n" +
+                "4. Quit\n" +
+                "Select an option : \n" +
+                "Select a valid option!\n" +
+                "1. List Books\n" +
+                "2. Check Out\n" +
+                "3. Return Book\n" +
+                "4. Quit\n" +
+                "Select an option : \n", actualResult);
+    }
+
     @Test
     public void shouldStartBibliotecaAndDisplayBooksIfSelected() {
         ByteArrayInputStream inputStream = new ByteArrayInputStream("1\n4\n".getBytes());
@@ -86,17 +114,32 @@ public class AppTest {
 
     @Test
     public void shouldStartBibliotecaAndCheckOutBookIfSelected() {
-        ByteArrayInputStream inputStream = new ByteArrayInputStream("2\n1\n4".getBytes());
+        ByteArrayInputStream inputStream = new ByteArrayInputStream("2\nC\n4\n".getBytes());
         Scanner scanner = new Scanner(inputStream);
         View view = new View(scanner);
         MainMenu mainMenu = new MainMenu(new String[]{Messages.LIST_BOOKS,
-                Messages.CHECK_OUT, Messages.RETURN_BOOK,  Messages.QUIT}, view);
+                Messages.CHECK_OUT, Messages.RETURN_BOOK, Messages.QUIT}, view);
         Library library = mock(Library.class);
         app = new App(mainMenu, library, view);
 
         app.start();
 
-        verify(library).checkout(1);
+        verify(library).checkout("C");
+    }
+
+    @Test
+    public void shouldStartBibliotecaAndReturnBookIfSelected() {
+        ByteArrayInputStream inputStream = new ByteArrayInputStream("2\nC\n3\nC\n4".getBytes());
+        Scanner scanner = new Scanner(inputStream);
+        View view = new View(scanner);
+        MainMenu mainMenu = new MainMenu(new String[]{Messages.LIST_BOOKS,
+                Messages.CHECK_OUT, Messages.RETURN_BOOK, Messages.QUIT}, view);
+        Library library = mock(Library.class);
+        app = new App(mainMenu, library, view);
+
+        app.start();
+
+        verify(library).returnBook("C");
     }
 
     @After

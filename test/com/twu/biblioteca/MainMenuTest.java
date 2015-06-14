@@ -46,7 +46,7 @@ public class MainMenuTest {
 
     @Test
     public void shouldReturnMinusOneWhenInvalidOptionIsSelected() {
-        ByteArrayInputStream inputStream = new ByteArrayInputStream("3".getBytes());
+        ByteArrayInputStream inputStream = new ByteArrayInputStream("7".getBytes());
         View view = new View(new Scanner(inputStream));
         MainMenu mainMenu = new MainMenu(new String[]{"List Books", "Quit"}, view);
 

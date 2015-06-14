@@ -20,10 +20,12 @@ public class App {
                 library.displayAvailableBooks();
             else if (optionSelectedByUser == 2) {
                 view.display(Messages.CHECK_OUT_PROMPT);
-                library.checkout(view.readInteger());
+                view.readLine();
+                library.checkout(view.readLine());
             } else if (optionSelectedByUser == 3) {
                 view.display(Messages.RETURN_BOOK_PROMPT);
-                library.returnBook(view.readInteger());
+                view.readLine();
+                library.returnBook(view.readLine());
             } else
                 return;
         }

@@ -17,4 +17,8 @@ public class View {
     public void display(String message) {
         System.out.println(message);
     }
+
+    public String readLine() {
+        return scanner.nextLine();
+    }
 }

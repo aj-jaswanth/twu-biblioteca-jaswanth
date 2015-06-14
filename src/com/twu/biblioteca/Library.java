@@ -24,24 +24,31 @@ public class Library {
             view.display((x + 1) + " " + availableBooks.get(x));
     }
 
-    public void displayCheckedOutBooks() {
-        for (int x = 0; x < checkedOutBooks.size(); x++)
-            view.display((x + 1) + " " + checkedOutBooks.get(x));
-    }
-
-    public void checkout(int bookIndex) {
-        if (0 < bookIndex && bookIndex <= availableBooks.size()) {
-            checkedOutBooks.add(availableBooks.get(bookIndex - 1));
-            availableBooks.remove(bookIndex - 1);
+    public void checkout(String bookTitle) {
+        Book dummyBook = new Book(bookTitle, null, 0);
+        int index = 0;
+        for (; index < availableBooks.size(); index++)
+            if (availableBooks.get(index).equals(dummyBook)) {
+                break;
+            }
+        if (index < availableBooks.size()) {
+            checkedOutBooks.add(availableBooks.get(index));
+            availableBooks.remove(index);
             view.display(Messages.CHECK_OUT_THANK_YOU);
         } else
             view.display(Messages.CHECK_OUT_ERROR);
     }
 
-    public void returnBook(int bookIndex) {
-        if (0 < bookIndex && bookIndex <= checkedOutBooks.size()) {
-            availableBooks.add(checkedOutBooks.get(bookIndex - 1));
-            checkedOutBooks.remove(bookIndex - 1);
+    public void returnBook(String bookTitle) {
+        Book dummyBook = new Book(bookTitle, null, 0);
+        int index = 0;
+        for (; index < checkedOutBooks.size(); index++)
+            if (checkedOutBooks.get(index).equals(dummyBook)) {
+                break;
+            }
+        if (index < checkedOutBooks.size()) {
+            availableBooks.add(checkedOutBooks.get(index));
+            checkedOutBooks.remove(index);
             view.display(Messages.RETURN_BOOK_THANK_YOU);
         } else
             view.display(Messages.RETURN_BOOK_ERROR);
