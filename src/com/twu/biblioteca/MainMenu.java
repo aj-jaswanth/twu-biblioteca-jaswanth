@@ -16,11 +16,11 @@ public class MainMenu {
     }
 
     public int selectedOption() {
-        System.out.print("Select an option : ");
+        System.out.print(Messages.MENU_SELECT_PROMPT);
         int selectedOption = input.nextInt();
         if (0 < selectedOption && selectedOption <= options.length)
             return selectedOption;
-        System.out.println("Select a valid option!");
+        System.out.println(Messages.MENU_SELECT_INVALID);
         return -1;
     }
 }

@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Biblioteca {
 
-    private MainMenu mainMenu = new MainMenu(new String[]{"List Books", "Check Out", "Quit"});
+    private MainMenu mainMenu = new MainMenu(new String[]{Messages.LIST_BOOKS, Messages.CHECK_OUT, Messages.QUIT});
     private Library library = new Library();
     private Scanner scanner = new Scanner(System.in);
 
@@ -15,7 +15,7 @@ public class Biblioteca {
             if (optionSelectedByUser == 1)
                 library.displayAvailableBooks();
             else if (optionSelectedByUser == 2) {
-                System.out.print("Enter book ID : ");
+                System.out.print(Messages.CHECK_OUT_PROMPT);
                 library.checkout(scanner.nextInt());
             } else
                 return;
@@ -23,7 +23,7 @@ public class Biblioteca {
     }
 
     public void welcomeUser() {
-        System.out.println("Bengaluru public library welcomes you!");
+        System.out.println(Messages.WELCOME_MESSAGE);
     }
 
     public int getOptionFromUser() {

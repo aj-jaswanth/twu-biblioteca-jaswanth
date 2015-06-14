@@ -26,8 +26,8 @@ public class Library {
         if (0 < bookIndex && bookIndex <= availableBooks.size()) {
             checkedOutBooks.add(availableBooks.get(bookIndex - 1));
             availableBooks.remove(bookIndex - 1);
-            System.out.println("Thank you! Enjoy the book");
+            System.out.println(Messages.CHECK_OUT_THANK_YOU);
         } else
-            System.out.println("That book is not available");
+            System.out.println(Messages.CHECK_OUT_ERROR);
     }
 }
