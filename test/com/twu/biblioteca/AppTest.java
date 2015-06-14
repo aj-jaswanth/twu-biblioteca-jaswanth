@@ -62,8 +62,6 @@ public class AppTest {
         Library library = new Library();
         app = new App(mainMenu, library, view);
 
-        System.setIn(inputStream);
-
         app.start();
         String actualOutput = outputStream.toString();
 
@@ -87,6 +85,24 @@ public class AppTest {
 
         assertThat(actualOutput, is(equalTo("Bengaluru public library welcomes you!\n" +
                 "1. List Books\n2. Check Out\n3. Quit\nSelect an option : \n")));
+    }
+
+    @Test
+    public void shouldStartBibliotecaAndCheckOutBookIfSelected() {
+        ByteArrayInputStream inputStream = new ByteArrayInputStream("2\n1\n3".getBytes());
+        Scanner scanner = new Scanner(inputStream);
+        View view = new View(scanner);
+        MainMenu mainMenu = new MainMenu(new String[]{Messages.LIST_BOOKS,
+                Messages.CHECK_OUT, Messages.QUIT}, view);
+        Library library = new Library();
+        app = new App(mainMenu, library, view);
+
+        app.start();
+        String actualOutput = outputStream.toString();
+
+        assertThat(actualOutput, is(equalTo("Bengaluru public library welcomes you!\n1. List Books\n2. Check Out\n3. Quit\n" +
+                "Select an option : \nEnter book ID : Thank you! Enjoy the book" +
+                "\n1. List Books\n2. Check Out\n3. Quit\nSelect an option : \n")));
     }
 
     @After
