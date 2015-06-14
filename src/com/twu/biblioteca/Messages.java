@@ -12,4 +12,6 @@ public interface Messages {
     String CHECK_OUT_PROMPT = "Enter book ID : ";
     String RETURN_BOOK = "Return Book";
     String RETURN_BOOK_PROMPT = "Enter book ID : ";
+    String RETURN_BOOK_THANK_YOU = "Thank you for returning the book";
+    String RETURN_BOOK_ERROR = "That is not a valid book to return";
 }

@@ -23,7 +23,7 @@ public class App {
                 library.checkout(view.readInteger());
             } else if (optionSelectedByUser == 3) {
                 view.display(Messages.RETURN_BOOK_PROMPT);
-                library.returnBook();
+                library.returnBook(view.readInteger());
             } else
                 return;
         }

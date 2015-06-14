@@ -38,7 +38,12 @@ public class Library {
             view.display(Messages.CHECK_OUT_ERROR);
     }
 
-    public void returnBook() {
-
+    public void returnBook(int bookIndex) {
+        if (0 < bookIndex && bookIndex <= checkedOutBooks.size()) {
+            availableBooks.add(checkedOutBooks.get(bookIndex - 1));
+            checkedOutBooks.remove(bookIndex - 1);
+            view.display(Messages.RETURN_BOOK_THANK_YOU);
+        } else
+            view.display(Messages.RETURN_BOOK_ERROR);
     }
 }

@@ -65,6 +65,19 @@ public class LibraryTest {
         assertEquals("That book is not available\n", actualOutput);
     }
 
+    @Test
+    public void returnedBookShouldNotBeInCheckedOutBooks() {
+        Library library = new Library(view);
+        library.checkout(1);
+        library.returnBook(1);
+        library.returnBook(1);
+
+        String actualOutput = outputStream.toString();
+
+        assertEquals("Thank you! Enjoy the book\n" +
+                "Thank you for returning the book\n" + Messages.RETURN_BOOK_ERROR + "\n", actualOutput);
+    }
+
     @After
     public void tearDown() {
         System.setOut(null);
