@@ -10,4 +10,6 @@ public interface Messages {
     String MENU_SELECT_PROMPT = "Select an option : ";
     String MENU_SELECT_INVALID = "Select a valid option!";
     String CHECK_OUT_PROMPT = "Enter book ID : ";
+    String RETURN_BOOK = "Return Book";
+    String RETURN_BOOK_PROMPT = "Enter book ID : ";
 }

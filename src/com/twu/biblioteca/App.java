@@ -19,8 +19,11 @@ public class App {
             if (optionSelectedByUser == 1)
                 library.displayAvailableBooks();
             else if (optionSelectedByUser == 2) {
-                System.out.print(Messages.CHECK_OUT_PROMPT);
+                view.display(Messages.CHECK_OUT_PROMPT);
                 library.checkout(view.readInteger());
+            } else if (optionSelectedByUser == 3) {
+                view.display(Messages.RETURN_BOOK_PROMPT);
+                library.returnBook();
             } else
                 return;
         }

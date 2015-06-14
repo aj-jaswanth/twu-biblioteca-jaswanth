@@ -11,15 +11,17 @@ import static org.junit.Assert.assertEquals;
 
 public class LibraryTest {
     private final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+    private View view;
 
     @Before
     public void setUp() {
         System.setOut(new PrintStream(outputStream));
+        view = new View(null);
     }
 
     @Test
     public void addingANewBookToLibraryShouldDisplayItInAvailableList() {
-        Library library = new Library();
+        Library library = new Library(view);
         library.addBook(new Book("Refactoring", "Martin", 2005));
 
         library.displayAvailableBooks();
@@ -31,20 +33,19 @@ public class LibraryTest {
 
     @Test
     public void checkedOutBookShouldNotBeAvailableInLibrary() {
-        Library library = new Library();
+        Library library = new Library(view);
 
         library.checkout(1);
-        outputStream.reset();
         library.displayAvailableBooks();
         String actualBooksList = outputStream.toString();
 
-        assertEquals("1 Physics Michio 2009\n" +
+        assertEquals("Thank you! Enjoy the book\n1 Physics Michio 2009\n" +
                 "2 C Dennis 1982\n", actualBooksList);
     }
 
     @Test
     public void shouldPrintMessageOnSuccessfulCheckoutOfABook() {
-        Library library = new Library();
+        Library library = new Library(view);
         library.addBook(new Book("Algorithms", "Cormen", 2014));
 
         library.checkout(1);
@@ -55,7 +56,7 @@ public class LibraryTest {
 
     @Test
     public void shouldPrintMessageOnUnsuccessfulCheckoutOfABook() {
-        Library library = new Library();
+        Library library = new Library(view);
         library.addBook(new Book("Algorithms", "Cormen", 2014));
 
         library.checkout(5);
