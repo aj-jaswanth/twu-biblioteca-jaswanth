@@ -27,6 +27,15 @@ public class Library {
         availableBooks.remove(index);
     }
 
+    public void searchBook(SearchAgent searchAgent) {
+        for (int x = 0; x < availableBooks.size(); x++) {
+            if (availableBooks.get(x).hashCode() == searchAgent.hashCode()) {
+                searchAgent.add(availableBooks.get(x));
+                break;
+            }
+        }
+    }
+
     public void displayAvailableBooks() {
         for (int x = 0; x < availableBooks.size(); x++)
             view.display((x + 1) + " " + availableBooks.get(x));

@@ -24,13 +24,25 @@ public class LibrarianTest {
     @Test
     public void shouldCheckOutTheGivenBook() {
         Library library = new Library(view);
-        Librarian librarian = new Librarian(new ArrayList<Book>(), library);
+        Librarian librarian = new Librarian(new ArrayList<Book>(), library, view);
 
         librarian.checkOutBook("Physics");
         library.displayAvailableBooks();
         String actualOutput = outputContent.toString();
         String expectedOutput = "Thank you! Enjoy the book\n1 Algorithms Cormen 2014\n" +
                 "2 C Dennis 1982\n";
+
+        assertEquals(expectedOutput, actualOutput);
+    }
+
+    @Test
+    public void shouldPrintErrorMessageWhenBookIsNotAvailable() {
+        Library library = new Library(view);
+        Librarian librarian = new Librarian(new ArrayList<Book>(), library, view);
+
+        librarian.checkOutBook("C#");
+        String actualOutput = outputContent.toString();
+        String expectedOutput = "That book is not available\n";
 
         assertEquals(expectedOutput, actualOutput);
     }

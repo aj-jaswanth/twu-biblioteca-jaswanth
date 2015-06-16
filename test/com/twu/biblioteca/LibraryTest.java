@@ -7,6 +7,7 @@ import org.junit.Test;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
+import static com.twu.biblioteca.Messages.RETURN_BOOK_ERROR;
 import static org.junit.Assert.assertEquals;
 
 public class LibraryTest {
@@ -86,7 +87,20 @@ public class LibraryTest {
         String actualOutput = outputStream.toString();
 
         assertEquals("Thank you! Enjoy the book\n" +
-                "Thank you for returning the book\n" + Messages.RETURN_BOOK_ERROR + "\n", actualOutput);
+                "Thank you for returning the book\n" + RETURN_BOOK_ERROR + "\n", actualOutput);
+    }
+
+    @Test
+    public void shouldReturnCorrectBookAsSearchResult() {
+        Library library = new Library(null);
+        SearchAgent<Book> searchAgent = new SearchAgent<Book>("Physics");
+        library.searchBook(searchAgent);
+
+        Book actualResult = searchAgent.result();
+        long actualHashCode = actualResult.hashCode();
+        long expectedHashCode = "Physics".hashCode();
+
+        assertEquals(expectedHashCode, actualHashCode);
     }
 
     @After

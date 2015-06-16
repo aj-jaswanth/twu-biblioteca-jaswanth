@@ -30,8 +30,11 @@ public class SearchAgent<T> {
 
     @Override
     public int hashCode() {
-        int result1 = searchKey != null ? searchKey.hashCode() : 0;
-        result1 = 31 * result1 + (result != null ? result.hashCode() : 0);
-        return result1;
+        return searchKey == null ? 0 : searchKey.hashCode();
+    }
+
+    @Override
+    public String toString() {
+        return searchKey;
     }
 }
