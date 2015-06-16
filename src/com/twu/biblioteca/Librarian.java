@@ -19,11 +19,11 @@ public class Librarian {
         library.searchBook(searchAgent);
         Book result = searchAgent.result();
         if (result != null) {
-            view.display(Messages.CHECK_OUT_THANK_YOU);
+            view.display(Messages.CHECK_OUT_BOOK_THANK_YOU);
             checkedOutBooks.add(result);
             library.removeBook(bookTitle);
         } else
-            view.display(Messages.CHECK_OUT_ERROR);
+            view.display(Messages.CHECK_OUT_BOOK_ERROR);
     }
 
     public void returnBook(String bookTitle) {

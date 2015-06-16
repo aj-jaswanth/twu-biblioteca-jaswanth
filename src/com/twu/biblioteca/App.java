@@ -21,10 +21,16 @@ public class App {
             if (optionSelectedByUser == 1)
                 library.displayAvailableBooks();
             else if (optionSelectedByUser == 2) {
-                view.display(Messages.CHECK_OUT_PROMPT);
+                view.display(Messages.LIST_MOVIES);
+                view.readLine();
+            } else if (optionSelectedByUser == 3) {
+                view.display(Messages.CHECK_OUT_BOOK_PROMPT);
                 view.readLine();
                 librarian.checkOutBook(view.readLine());
-            } else if (optionSelectedByUser == 3) {
+            } else if (optionSelectedByUser == 4) {
+                view.display(Messages.CHECK_OUT_MOVIE_PROMPT);
+                view.readLine();
+            } else if (optionSelectedByUser == 5) {
                 view.display(Messages.RETURN_BOOK_PROMPT);
                 view.readLine();
                 librarian.returnBook(view.readLine());
