@@ -31,6 +31,7 @@ public class App {
             } else if (optionSelectedByUser == 4) {
                 view.display(Messages.CHECK_OUT_MOVIE_PROMPT);
                 view.readLine();
+                librarian.checkOutMovie(view.readLine());
             } else if (optionSelectedByUser == 5) {
                 view.display(Messages.RETURN_BOOK_PROMPT);
                 view.readLine();

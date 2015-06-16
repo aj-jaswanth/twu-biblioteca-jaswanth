@@ -9,7 +9,9 @@ public interface Messages {
     String QUIT = "Quit";
     String CHECK_OUT_BOOK_PROMPT = "Enter book title : ";
     String CHECK_OUT_BOOK_THANK_YOU = "Thank you! Enjoy the book";
+    String CHECK_OUT_MOVIE_THANK_YOU = "Thank you! Enjoy the movie";
     String CHECK_OUT_BOOK_ERROR = "That book is not available";
+    String CHECK_OUT_MOVIE_ERROR = "That movie is not available";
     String MENU_SELECT_PROMPT = "Select an option : ";
     String MENU_SELECT_INVALID = "Select a valid option!";
     String RETURN_BOOK = "Return Book";

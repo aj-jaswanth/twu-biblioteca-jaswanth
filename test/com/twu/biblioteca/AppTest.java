@@ -45,7 +45,7 @@ public class AppTest {
         View view = new View(scanner);
         MainMenu mainMenu = new MainMenu(new String[]{Messages.LIST_BOOKS, Messages.LIST_MOVIES,
                 Messages.CHECK_OUT_BOOK, Messages.CHECK_OUT_MOVIE, Messages.RETURN_BOOK, Messages.QUIT}, view);
-        Library library = new Library(null);
+        Library library = new Library(null, null, null);
         app = new App(mainMenu, library, null, view);
 
         int actualSelectedOption = app.getUserOption();
@@ -61,7 +61,7 @@ public class AppTest {
         View view = new View(scanner);
         MainMenu mainMenu = new MainMenu(new String[]{Messages.LIST_BOOKS, Messages.LIST_MOVIES,
                 Messages.CHECK_OUT_BOOK, Messages.CHECK_OUT_MOVIE, Messages.RETURN_BOOK, Messages.QUIT}, view);
-        Library library = new Library(view);
+        Library library = new Library(view, null, null);
         app = new App(mainMenu, library, null, view);
 
         app.getUserOption();
@@ -121,7 +121,7 @@ public class AppTest {
         View view = new View(scanner);
         MainMenu mainMenu = new MainMenu(new String[]{Messages.LIST_BOOKS, Messages.LIST_MOVIES,
                 Messages.CHECK_OUT_BOOK, Messages.CHECK_OUT_MOVIE, Messages.RETURN_BOOK, Messages.QUIT}, view);
-        Library library = new Library(view);
+        Library library = new Library(view, null, null);
         app = new App(mainMenu, library, null, view);
 
         app.start();
@@ -151,6 +151,22 @@ public class AppTest {
         app.start();
 
         verify(librarian).checkOutBook("C");
+    }
+
+    @Test
+    public void shouldStartBibliotecaAndCheckOutMovieIfSelected() {
+        ByteArrayInputStream inputStream = new ByteArrayInputStream("4\nInterstellar\n6\n".getBytes());
+        Scanner scanner = new Scanner(inputStream);
+        View view = new View(scanner);
+        MainMenu mainMenu = new MainMenu(new String[]{Messages.LIST_BOOKS, Messages.LIST_MOVIES,
+                Messages.CHECK_OUT_BOOK, Messages.CHECK_OUT_MOVIE, Messages.RETURN_BOOK, Messages.QUIT}, view);
+        Library library = mock(Library.class);
+        Librarian librarian = mock(Librarian.class);
+        app = new App(mainMenu, library, librarian, view);
+
+        app.start();
+
+        verify(librarian).checkOutMovie("Interstellar");
     }
 
     @Test
