@@ -40,35 +40,4 @@ public class Library {
         for (int x = 0; x < availableBooks.size(); x++)
             view.display((x + 1) + " " + availableBooks.get(x));
     }
-
-    public Book checkout(String bookTitle) {
-        int index = 0;
-        Book book = null;
-        for (; index < availableBooks.size(); index++)
-            if (availableBooks.get(index).hashCode() == bookTitle.hashCode()) {
-                break;
-            }
-        if (index < availableBooks.size()) {
-            book = availableBooks.get(index);
-            checkedOutBooks.add(book);
-            availableBooks.remove(index);
-            view.display(Messages.CHECK_OUT_THANK_YOU);
-        } else
-            view.display(Messages.CHECK_OUT_ERROR);
-        return book;
-    }
-
-    public void returnBook(String bookTitle) {
-        int index = 0;
-        for (; index < checkedOutBooks.size(); index++)
-            if (checkedOutBooks.get(index).hashCode() == bookTitle.hashCode()) {
-                break;
-            }
-        if (index < checkedOutBooks.size()) {
-            availableBooks.add(checkedOutBooks.get(index));
-            checkedOutBooks.remove(index);
-            view.display(Messages.RETURN_BOOK_THANK_YOU);
-        } else
-            view.display(Messages.RETURN_BOOK_ERROR);
-    }
 }

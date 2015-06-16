@@ -6,7 +6,7 @@ import org.junit.Test;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
 
 import static org.junit.Assert.assertEquals;
 
@@ -51,10 +51,9 @@ public class LibrarianTest {
     @Test
     public void shouldAddAReturnedBookToLibrary() {
         Library library = new Library(view);
-        Librarian librarian = new Librarian(new ArrayList<Book>(Arrays.asList(new Book("Physics", "Michio", 2009))),
+        Librarian librarian = new Librarian(new ArrayList<Book>(Collections.singletonList(new Book("Physics", "Michio", 2009))),
                 library, view);
-
-        library.checkout("Physics");
+        librarian.checkOutBook("Physics");
         librarian.returnBook("Physics");
         library.displayAvailableBooks();
         String actualOutput = outputContent.toString();

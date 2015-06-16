@@ -6,6 +6,7 @@ import org.junit.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.util.ArrayList;
 
 import static com.twu.biblioteca.Messages.RETURN_BOOK_ERROR;
 import static org.junit.Assert.assertEquals;
@@ -35,8 +36,8 @@ public class LibraryTest {
     @Test
     public void checkedOutBookShouldNotBeAvailableInLibrary() {
         Library library = new Library(view);
-
-        library.checkout("Algorithms");
+        Librarian librarian = new Librarian(new ArrayList<Book>(), library, view);
+        librarian.checkOutBook("Algorithms");
         library.displayAvailableBooks();
         String actualBooksList = outputStream.toString();
 
@@ -59,8 +60,8 @@ public class LibraryTest {
     @Test
     public void shouldPrintMessageOnSuccessfulCheckoutOfABook() {
         Library library = new Library(view);
-
-        library.checkout("Algorithms");
+        Librarian librarian = new Librarian(new ArrayList<Book>(), library, view);
+        librarian.checkOutBook("Algorithms");
         String actualOutput = outputStream.toString();
 
         assertEquals("Thank you! Enjoy the book\n", actualOutput);
@@ -70,8 +71,8 @@ public class LibraryTest {
     public void shouldPrintMessageOnUnsuccessfulCheckoutOfABook() {
         Library library = new Library(view);
         library.addBook(new Book("Algorithms", "Cormen", 2014));
-
-        library.checkout("Apple Mac");
+        Librarian librarian = new Librarian(new ArrayList<Book>(), library, view);
+        librarian.checkOutBook("Apple Mac");
         String actualOutput = outputStream.toString();
 
         assertEquals("That book is not available\n", actualOutput);
@@ -80,9 +81,10 @@ public class LibraryTest {
     @Test
     public void returnedBookShouldNotBeInCheckedOutBooks() {
         Library library = new Library(view);
-        library.checkout("C");
-        library.returnBook("C");
-        library.returnBook("C");
+        Librarian librarian = new Librarian(new ArrayList<Book>(), library, view);
+        librarian.checkOutBook("C");
+        librarian.returnBook("C");
+        librarian.returnBook("C");
 
         String actualOutput = outputStream.toString();
 
