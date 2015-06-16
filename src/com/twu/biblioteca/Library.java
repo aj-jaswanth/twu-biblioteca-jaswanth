@@ -5,7 +5,6 @@ import java.util.ArrayList;
 public class Library {
 
     private ArrayList<Book> availableBooks = new ArrayList<Book>();
-    private ArrayList<Book> checkedOutBooks = new ArrayList<Book>();
     private View view;
 
     public Library(View view) {
@@ -28,9 +27,9 @@ public class Library {
     }
 
     public void searchBook(SearchAgent searchAgent) {
-        for (int x = 0; x < availableBooks.size(); x++) {
-            if (availableBooks.get(x).hashCode() == searchAgent.hashCode()) {
-                searchAgent.add(availableBooks.get(x));
+        for (Book availableBook : availableBooks) {
+            if (availableBook.hashCode() == searchAgent.hashCode()) {
+                searchAgent.add(availableBook);
                 break;
             }
         }
