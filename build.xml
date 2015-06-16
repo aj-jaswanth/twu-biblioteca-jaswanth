@@ -14,14 +14,17 @@
         <mkdir dir="out/src/classes"/>
         <javac srcdir="src" destdir="out/src/classes"/>
     </target>
-
+    
+    <target name="run">
+        <java classpath="out/production/biblioteca" classname="com.twu.biblioteca.EntryPoint"/>
+    </target> 
     <target name="compileTests">
         <mkdir dir="out/test/classes"/>
         <javac srcdir="test" destdir="out/test/classes" classpathref="classpath" classpath="out/src/classes"/>
     </target>
 
     <target name="test" depends="compile,compileTests">
-        <junit printsummary="yes">
+        <junit printsummary="yes" failureproperty="test.failed">
             <classpath>
                 <path refid="classpath"/>
                 <path path="out/src/classes"/>
@@ -34,6 +37,7 @@
                 <fileset dir="test" includes="**/*Test.java"/>
             </batchtest>
         </junit>
+	<fail message="TESTS FAILED" if="test.failed"/>
     </target>
 
     <target name="jar" depends="test">
@@ -44,9 +48,4 @@
             </manifest>
         </jar>
     </target>
-
-    <target name="run">
-        <java jar="out/jar/twu_biblioteca.jar" fork="true"/>
-    </target>
-
 </project>

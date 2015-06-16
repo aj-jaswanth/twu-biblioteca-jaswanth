@@ -44,6 +44,18 @@ public class LibraryTest {
     }
 
     @Test
+    public void shouldRemoveABookFromLibrary() {
+        Library library = new Library(view);
+
+        library.removeBook("Physics");
+        library.displayAvailableBooks();
+        String actualOutput = outputStream.toString();
+
+        assertEquals("1 Algorithms Cormen 2014\n" +
+                "2 C Dennis 1982\n", actualOutput);
+    }
+
+    @Test
     public void shouldPrintMessageOnSuccessfulCheckoutOfABook() {
         Library library = new Library(view);
 

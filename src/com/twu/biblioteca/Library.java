@@ -19,6 +19,14 @@ public class Library {
         availableBooks.add(book);
     }
 
+    public void removeBook(String bookTitle) {
+        int index = 0;
+        for (; index < availableBooks.size(); index++)
+            if (availableBooks.get(index).hashCode() == bookTitle.hashCode())
+                break;
+        availableBooks.remove(index);
+    }
+
     public void displayAvailableBooks() {
         for (int x = 0; x < availableBooks.size(); x++)
             view.display((x + 1) + " " + availableBooks.get(x));
