@@ -1,5 +1,6 @@
 package com.twu.biblioteca;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class EntryPoint {
@@ -9,7 +10,8 @@ public class EntryPoint {
         MainMenu mainMenu = new MainMenu(new String[]{Messages.LIST_BOOKS,
                 Messages.CHECK_OUT, Messages.RETURN_BOOK, Messages.QUIT}, view);
         Library library = new Library(view);
-        App app = new App(mainMenu, library, view);
+        Librarian librarian = new Librarian(new ArrayList<Book>(), library, view);
+        App app = new App(mainMenu, library, librarian, view);
         app.start();
     }
 }

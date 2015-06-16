@@ -7,10 +7,11 @@ public class App {
     private View view;
     private Librarian librarian;
 
-    public App(MainMenu mainMenu, Library library, View view) {
+    public App(MainMenu mainMenu, Library library, Librarian librarian, View view) {
         this.mainMenu = mainMenu;
         this.library = library;
         this.view = view;
+        this.librarian = librarian;
     }
 
     public void start() {
@@ -22,11 +23,11 @@ public class App {
             else if (optionSelectedByUser == 2) {
                 view.display(Messages.CHECK_OUT_PROMPT);
                 view.readLine();
-                library.checkout(view.readLine());
+                librarian.checkOutBook(view.readLine());
             } else if (optionSelectedByUser == 3) {
                 view.display(Messages.RETURN_BOOK_PROMPT);
                 view.readLine();
-                library.returnBook(view.readLine());
+                librarian.returnBook(view.readLine());
             } else
                 return;
         }

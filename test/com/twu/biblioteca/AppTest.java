@@ -30,7 +30,7 @@ public class AppTest {
     public void shouldPrintWelcomeMessage() {
         Scanner scanner = new Scanner(System.in);
         View view = new View(scanner);
-        app = new App(null, null, view);
+        app = new App(null, null, null, view);
 
         app.welcomeUser();
         String actualWelcomeMessage = outputStream.toString();
@@ -46,7 +46,7 @@ public class AppTest {
         MainMenu mainMenu = new MainMenu(new String[]{Messages.LIST_BOOKS,
                 Messages.CHECK_OUT, Messages.QUIT}, view);
         Library library = new Library(null);
-        app = new App(mainMenu, library, view);
+        app = new App(mainMenu, library, null, view);
 
         int actualSelectedOption = app.getUserOption();
 
@@ -62,7 +62,7 @@ public class AppTest {
         MainMenu mainMenu = new MainMenu(new String[]{Messages.LIST_BOOKS,
                 Messages.CHECK_OUT, Messages.RETURN_BOOK, Messages.QUIT}, view);
         Library library = new Library(view);
-        app = new App(mainMenu, library, view);
+        app = new App(mainMenu, library, null, view);
 
         app.getUserOption();
         String actualResult = outputStream.toString();
@@ -88,7 +88,7 @@ public class AppTest {
         MainMenu mainMenu = new MainMenu(new String[]{Messages.LIST_BOOKS,
                 Messages.CHECK_OUT, Messages.RETURN_BOOK, Messages.QUIT}, view);
         Library library = mock(Library.class);
-        app = new App(mainMenu, library, view);
+        app = new App(mainMenu, library, null, view);
 
         app.start();
 
@@ -103,7 +103,7 @@ public class AppTest {
         MainMenu mainMenu = new MainMenu(new String[]{Messages.LIST_BOOKS,
                 Messages.CHECK_OUT, Messages.RETURN_BOOK, Messages.QUIT}, view);
         Library library = new Library(view);
-        app = new App(mainMenu, library, view);
+        app = new App(mainMenu, library, null, view);
 
         app.start();
         String actualOutput = outputStream.toString();
@@ -120,11 +120,12 @@ public class AppTest {
         MainMenu mainMenu = new MainMenu(new String[]{Messages.LIST_BOOKS,
                 Messages.CHECK_OUT, Messages.RETURN_BOOK, Messages.QUIT}, view);
         Library library = mock(Library.class);
-        app = new App(mainMenu, library, view);
+        Librarian librarian = mock(Librarian.class);
+        app = new App(mainMenu, library, librarian, view);
 
         app.start();
 
-        verify(library).checkout("C");
+        verify(librarian).checkOutBook("C");
     }
 
     @Test
@@ -135,11 +136,12 @@ public class AppTest {
         MainMenu mainMenu = new MainMenu(new String[]{Messages.LIST_BOOKS,
                 Messages.CHECK_OUT, Messages.RETURN_BOOK, Messages.QUIT}, view);
         Library library = mock(Library.class);
-        app = new App(mainMenu, library, view);
+        Librarian librarian = mock(Librarian.class);
+        app = new App(mainMenu, library, librarian, view);
 
         app.start();
 
-        verify(library).returnBook("C");
+        verify(librarian).returnBook("C");
     }
 
     @After
