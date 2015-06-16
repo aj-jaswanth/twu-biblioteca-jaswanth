@@ -24,18 +24,21 @@ public class Library {
             view.display((x + 1) + " " + availableBooks.get(x));
     }
 
-    public void checkout(String bookTitle) {
+    public Book checkout(String bookTitle) {
         int index = 0;
+        Book book = null;
         for (; index < availableBooks.size(); index++)
             if (availableBooks.get(index).hashCode() == bookTitle.hashCode()) {
                 break;
             }
         if (index < availableBooks.size()) {
-            checkedOutBooks.add(availableBooks.get(index));
+            book = availableBooks.get(index);
+            checkedOutBooks.add(book);
             availableBooks.remove(index);
             view.display(Messages.CHECK_OUT_THANK_YOU);
         } else
             view.display(Messages.CHECK_OUT_ERROR);
+        return book;
     }
 
     public void returnBook(String bookTitle) {
