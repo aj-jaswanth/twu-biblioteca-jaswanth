@@ -100,6 +100,21 @@ public class AppTest {
     }
 
     @Test
+    public void shouldStartBibliotecaAndDisplayMoviesIfSelected() {
+        ByteArrayInputStream inputStream = new ByteArrayInputStream("2\n6\n".getBytes());
+        Scanner scanner = new Scanner(inputStream);
+        View view = new View(scanner);
+        MainMenu mainMenu = new MainMenu(new String[]{Messages.LIST_BOOKS, Messages.LIST_MOVIES,
+                Messages.CHECK_OUT_BOOK, Messages.CHECK_OUT_MOVIE, Messages.RETURN_BOOK, Messages.QUIT}, view);
+        Library library = mock(Library.class);
+        app = new App(mainMenu, library, null, view);
+
+        app.start();
+
+        verify(library, times(1)).displayAvailableMovies();
+    }
+
+    @Test
     public void shouldStartBibliotecaAndQuitIfSelected() {
         ByteArrayInputStream inputStream = new ByteArrayInputStream("6".getBytes());
         Scanner scanner = new Scanner(inputStream);

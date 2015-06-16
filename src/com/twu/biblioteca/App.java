@@ -23,6 +23,7 @@ public class App {
             else if (optionSelectedByUser == 2) {
                 view.display(Messages.LIST_MOVIES);
                 view.readLine();
+                library.displayAvailableMovies();
             } else if (optionSelectedByUser == 3) {
                 view.display(Messages.CHECK_OUT_BOOK_PROMPT);
                 view.readLine();
