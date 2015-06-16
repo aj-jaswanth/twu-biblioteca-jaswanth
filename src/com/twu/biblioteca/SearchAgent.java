@@ -32,9 +32,4 @@ public class SearchAgent<T> {
     public int hashCode() {
         return searchKey == null ? 0 : searchKey.hashCode();
     }
-
-    @Override
-    public String toString() {
-        return searchKey;
-    }
 }

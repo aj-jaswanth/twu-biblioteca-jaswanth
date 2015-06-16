@@ -25,4 +25,18 @@ public class Librarian {
         } else
             view.display(Messages.CHECK_OUT_ERROR);
     }
+
+    public void returnBook(String bookTitle) {
+        int index = 0;
+        for (; index < checkedOutBooks.size(); index++) {
+            Book book = checkedOutBooks.get(index);
+            if (book.hashCode() == bookTitle.hashCode()) {
+                checkedOutBooks.remove(book);
+                library.addBook(book);
+                view.display(Messages.RETURN_BOOK_THANK_YOU);
+                return;
+            }
+        }
+        view.display(Messages.RETURN_BOOK_ERROR);
+    }
 }

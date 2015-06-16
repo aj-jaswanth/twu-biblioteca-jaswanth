@@ -5,6 +5,7 @@ public class App {
     private MainMenu mainMenu;
     private Library library;
     private View view;
+    private Librarian librarian;
 
     public App(MainMenu mainMenu, Library library, View view) {
         this.mainMenu = mainMenu;
