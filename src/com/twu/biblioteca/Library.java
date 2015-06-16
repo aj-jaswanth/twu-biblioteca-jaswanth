@@ -25,10 +25,9 @@ public class Library {
     }
 
     public void checkout(String bookTitle) {
-        Book dummyBook = new Book(bookTitle, null, 0);
         int index = 0;
         for (; index < availableBooks.size(); index++)
-            if (availableBooks.get(index).equals(dummyBook)) {
+            if (availableBooks.get(index).hashCode() == bookTitle.hashCode()) {
                 break;
             }
         if (index < availableBooks.size()) {
@@ -40,10 +39,9 @@ public class Library {
     }
 
     public void returnBook(String bookTitle) {
-        Book dummyBook = new Book(bookTitle, null, 0);
         int index = 0;
         for (; index < checkedOutBooks.size(); index++)
-            if (checkedOutBooks.get(index).equals(dummyBook)) {
+            if (checkedOutBooks.get(index).hashCode() == bookTitle.hashCode()) {
                 break;
             }
         if (index < checkedOutBooks.size()) {
