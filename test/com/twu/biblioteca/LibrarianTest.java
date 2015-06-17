@@ -10,7 +10,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import static com.twu.biblioteca.Messages.RETURN_BOOK_ERROR;
 import static org.junit.Assert.assertEquals;
 
 public class LibrarianTest {
@@ -38,8 +37,7 @@ public class LibrarianTest {
         librarian.checkOutBook("Physics");
         library.displayAvailableBooks();
         String actualOutput = outputContent.toString();
-        String expectedOutput = "Thank you! Enjoy the book\n1 Algorithms Cormen 2014\n" +
-                "2 C Dennis 1982\n";
+        String expectedOutput = "Thank you! Enjoy the book\n1 Algorithms Cormen 2014\n2 C Dennis 1982\n";
 
         assertEquals(expectedOutput, actualOutput);
     }
@@ -52,13 +50,12 @@ public class LibrarianTest {
         library.displayAvailableBooks();
         String actualBooksList = outputContent.toString();
 
-        assertEquals("Thank you! Enjoy the book\n1 Physics Michio 2009\n" +
-                "2 C Dennis 1982\n", actualBooksList);
+        assertEquals("Thank you! Enjoy the book\n1 Physics Michio 2009\n2 C Dennis 1982\n", actualBooksList);
     }
 
     @Test
     public void checkedOutMovieShouldNotBeAvailableInLibrary() {
-        availableMovies = new ArrayList<Movie>(Arrays.asList(new Movie("Interstellar", 2014, "Nolan", 10)));
+        availableMovies = new ArrayList<Movie>(Collections.singletonList(new Movie("Interstellar", 2014, "Nolan", 10)));
         Library library = new Library(view, availableBooks, availableMovies);
         Librarian librarian = new Librarian(null, new ArrayList<Movie>(), library, view);
         librarian.checkOutMovie("Interstellar");
@@ -77,9 +74,7 @@ public class LibrarianTest {
         librarian.checkOutMovie("Interstellar");
         library.displayAvailableMovies();
         String actualOutput = outputContent.toString();
-        String expectedOutput = "Thank you! Enjoy the movie\n" +
-                "1 Die Hard 4 2009 Bruce Wills 10.0\n" +
-                "2 The Pursuit of Happyness 2003 Will Smith 10.0\n";
+        String expectedOutput = "Thank you! Enjoy the movie\n1 Die Hard 4 2009 Bruce Wills 10.0\n2 The Pursuit of Happyness 2003 Will Smith 10.0\n";
 
         assertEquals(expectedOutput, actualOutput);
     }
@@ -107,11 +102,7 @@ public class LibrarianTest {
         library.displayAvailableBooks();
         String actualOutput = outputContent.toString();
 
-        assertEquals("Thank you! Enjoy the book\n" +
-                "Thank you for returning the book\n" +
-                "1 Algorithms Cormen 2014\n" +
-                "2 C Dennis 1982\n" +
-                "3 Physics Michio 2009\n", actualOutput);
+        assertEquals("Thank you! Enjoy the book\nThank you for returning the book\n1 Algorithms Cormen 2014\n2 C Dennis 1982\n3 Physics Michio 2009\n", actualOutput);
     }
 
     @Test
@@ -179,8 +170,7 @@ public class LibrarianTest {
 
         String actualOutput = outputContent.toString();
 
-        assertEquals("Thank you! Enjoy the book\n" +
-                "Thank you for returning the book\n" + RETURN_BOOK_ERROR + "\n", actualOutput);
+        assertEquals("Thank you! Enjoy the book\nThank you for returning the book\nThat is not a valid book to return\n", actualOutput);
     }
 
     @Test
@@ -194,7 +184,6 @@ public class LibrarianTest {
 
         String actualOutput = outputContent.toString();
 
-        assertEquals("Thank you! Enjoy the movie\n" +
-                "Thank you for returning the movie\n" + Messages.RETURN_MOVIE_ERROR + "\n", actualOutput);
+        assertEquals("Thank you! Enjoy the movie\nThank you for returning the movie\nThat is not a valid movie to return\n", actualOutput);
     }
 }

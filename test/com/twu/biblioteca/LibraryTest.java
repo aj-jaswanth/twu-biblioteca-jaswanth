@@ -35,8 +35,7 @@ public class LibraryTest {
         library.displayAvailableBooks();
         String actualBooksList = outputStream.toString();
 
-        assertEquals("1 Algorithms Cormen 2014\n2 Physics Michio 2009\n" +
-                "3 C Dennis 1982\n4 Refactoring Martin 2005\n", actualBooksList);
+        assertEquals("1 Algorithms Cormen 2014\n2 Physics Michio 2009\n3 C Dennis 1982\n4 Refactoring Martin 2005\n", actualBooksList);
     }
 
     @Test
@@ -59,8 +58,7 @@ public class LibraryTest {
         library.displayAvailableBooks();
         String actualOutput = outputStream.toString();
 
-        assertEquals("1 Algorithms Cormen 2014\n" +
-                "2 C Dennis 1982\n", actualOutput);
+        assertEquals("1 Algorithms Cormen 2014\n2 C Dennis 1982\n", actualOutput);
     }
 
     @Test

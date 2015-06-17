@@ -1,5 +1,7 @@
 package com.twu.biblioteca;
 
+import static com.twu.biblioteca.Messages.*;
+
 public class App {
 
     private MainMenu mainMenu;
@@ -17,36 +19,46 @@ public class App {
     public void start() {
         welcomeUser();
         while (true) {
-            int optionSelectedByUser = getUserOption();
-            if (optionSelectedByUser == 1)
-                library.displayAvailableBooks();
-            else if (optionSelectedByUser == 2) {
-                view.display(Messages.LIST_MOVIES);
-                view.readLine();
-                library.displayAvailableMovies();
-            } else if (optionSelectedByUser == 3) {
-                view.display(Messages.CHECK_OUT_BOOK_PROMPT);
-                view.readLine();
-                librarian.checkOutBook(view.readLine());
-            } else if (optionSelectedByUser == 4) {
-                view.display(Messages.CHECK_OUT_MOVIE_PROMPT);
-                view.readLine();
-                librarian.checkOutMovie(view.readLine());
-            } else if (optionSelectedByUser == 5) {
-                view.display(Messages.RETURN_BOOK_PROMPT);
-                view.readLine();
-                librarian.returnBook(view.readLine());
-            } else if (optionSelectedByUser == 6) {
-                view.display(Messages.RETURN_MOVIE_PROMPT);
-                view.readLine();
-                librarian.returnMovie(view.readLine());
-            } else
-                return;
+            try {
+                switch (getUserOption()) {
+                    case 1:
+                        library.displayAvailableBooks();
+                        break;
+                    case 2:
+                        view.readLine();
+                        library.displayAvailableMovies();
+                        break;
+                    case 3:
+                        view.display(CHECK_OUT_BOOK_PROMPT);
+                        view.readLine();
+                        librarian.checkOutBook(view.readLine());
+                        break;
+                    case 4:
+                        view.display(CHECK_OUT_MOVIE_PROMPT);
+                        view.readLine();
+                        librarian.checkOutMovie(view.readLine());
+                        break;
+                    case 5:
+                        view.display(RETURN_BOOK_PROMPT);
+                        view.readLine();
+                        librarian.returnBook(view.readLine());
+                        break;
+                    case 6:
+                        view.display(RETURN_MOVIE_PROMPT);
+                        view.readLine();
+                        librarian.returnMovie(view.readLine());
+                        break;
+                    case 7:
+                        return;
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 
     public void welcomeUser() {
-        view.display(Messages.WELCOME_MESSAGE);
+        view.display(WELCOME_MESSAGE);
     }
 
     public int getUserOption() {

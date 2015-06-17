@@ -1,5 +1,8 @@
 package com.twu.biblioteca;
 
+import static com.twu.biblioteca.Messages.MENU_SELECT_INVALID;
+import static com.twu.biblioteca.Messages.MENU_SELECT_PROMPT;
+
 public class MainMenu {
     private String[] options;
     private View view;
@@ -15,11 +18,11 @@ public class MainMenu {
     }
 
     public int selectedOption() {
-        view.display(Messages.MENU_SELECT_PROMPT);
+        view.display(MENU_SELECT_PROMPT);
         int selectedOption = view.readInteger();
         if (0 < selectedOption && selectedOption <= options.length)
             return selectedOption;
-        view.display(Messages.MENU_SELECT_INVALID);
+        view.display(MENU_SELECT_INVALID);
         return -1;
     }
 }

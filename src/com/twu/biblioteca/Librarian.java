@@ -2,6 +2,8 @@ package com.twu.biblioteca;
 
 import java.util.List;
 
+import static com.twu.biblioteca.Messages.*;
+
 public class Librarian {
 
     private List<Book> checkedOutBooks;
@@ -21,11 +23,11 @@ public class Librarian {
         library.searchBook(searchAgent);
         Book result = searchAgent.result();
         if (result != null) {
-            view.display(Messages.CHECK_OUT_BOOK_THANK_YOU);
+            view.display(CHECK_OUT_BOOK_THANK_YOU);
             checkedOutBooks.add(result);
             library.removeBook(bookTitle);
         } else
-            view.display(Messages.CHECK_OUT_BOOK_ERROR);
+            view.display(CHECK_OUT_BOOK_ERROR);
     }
 
     public void checkOutMovie(String movieTitle) {
@@ -33,11 +35,11 @@ public class Librarian {
         library.searchMovie(searchAgent);
         Movie result = searchAgent.result();
         if (result != null) {
-            view.display(Messages.CHECK_OUT_MOVIE_THANK_YOU);
+            view.display(CHECK_OUT_MOVIE_THANK_YOU);
             checkedOutMovies.add(result);
             library.removeMovie(movieTitle);
         } else
-            view.display(Messages.CHECK_OUT_MOVIE_ERROR);
+            view.display(CHECK_OUT_MOVIE_ERROR);
     }
 
     public void returnBook(String bookTitle) {
@@ -47,11 +49,11 @@ public class Librarian {
             if (book.hashCode() == bookTitle.hashCode()) {
                 checkedOutBooks.remove(book);
                 library.addBook(book);
-                view.display(Messages.RETURN_BOOK_THANK_YOU);
+                view.display(RETURN_BOOK_THANK_YOU);
                 return;
             }
         }
-        view.display(Messages.RETURN_BOOK_ERROR);
+        view.display(RETURN_BOOK_ERROR);
     }
 
     public void returnMovie(String movieTitle) {
@@ -61,10 +63,10 @@ public class Librarian {
             if (movie.hashCode() == movieTitle.hashCode()) {
                 checkedOutMovies.remove(movie);
                 library.addMovie(movie);
-                view.display(Messages.RETURN_MOVIE_THANK_YOU);
+                view.display(RETURN_MOVIE_THANK_YOU);
                 return;
             }
         }
-        view.display(Messages.RETURN_MOVIE_ERROR);
+        view.display(RETURN_MOVIE_ERROR);
     }
 }
