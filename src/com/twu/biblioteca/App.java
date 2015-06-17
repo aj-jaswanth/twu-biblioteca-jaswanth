@@ -1,16 +1,17 @@
 package com.twu.biblioteca;
 
-import static com.twu.biblioteca.Messages.*;
+import static com.twu.biblioteca.Messages.WELCOME_MESSAGE;
 
 public class App {
 
-    private MainMenu mainMenu;
+    private BasicMainMenu basicMainMenu;
     private Library library;
     private View view;
     private Librarian librarian;
+    private BasicMainMenu[] basicMainMenus;
 
-    public App(MainMenu mainMenu, Library library, Librarian librarian, View view) {
-        this.mainMenu = mainMenu;
+    public App(BasicMainMenu basicMainMenu, Library library, Librarian librarian, View view) {
+        this.basicMainMenu = basicMainMenu;
         this.library = library;
         this.view = view;
         this.librarian = librarian;
@@ -19,41 +20,8 @@ public class App {
     public void start() {
         welcomeUser();
         while (true) {
-            try {
-                switch (getUserOption()) {
-                    case 1:
-                        library.displayAvailableBooks();
-                        break;
-                    case 2:
-                        view.readLine();
-                        library.displayAvailableMovies();
-                        break;
-                    case 3:
-                        view.display(CHECK_OUT_BOOK_PROMPT);
-                        view.readLine();
-                        librarian.checkOutBook(view.readLine());
-                        break;
-                    case 4:
-                        view.display(CHECK_OUT_MOVIE_PROMPT);
-                        view.readLine();
-                        librarian.checkOutMovie(view.readLine());
-                        break;
-                    case 5:
-                        view.display(RETURN_BOOK_PROMPT);
-                        view.readLine();
-                        librarian.returnBook(view.readLine());
-                        break;
-                    case 6:
-                        view.display(RETURN_MOVIE_PROMPT);
-                        view.readLine();
-                        librarian.returnMovie(view.readLine());
-                        break;
-                    case 7:
-                        return;
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            if (basicMainMenu.processOption(getUserOption()) == -1)
+                return;
         }
     }
 
@@ -64,8 +32,8 @@ public class App {
     public int getUserOption() {
         int selectedOption;
         while (true) {
-            mainMenu.displayOptions();
-            selectedOption = mainMenu.selectedOption();
+            basicMainMenu.displayOptions();
+            selectedOption = basicMainMenu.selectedOption();
             if (selectedOption == -1)
                 continue;
             return selectedOption;

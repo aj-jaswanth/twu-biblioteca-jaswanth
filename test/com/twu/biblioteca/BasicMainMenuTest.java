@@ -12,7 +12,7 @@ import java.util.Scanner;
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.assertThat;
 
-public class MainMenuTest {
+public class BasicMainMenuTest {
 
     private final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 
@@ -24,9 +24,9 @@ public class MainMenuTest {
     @Test
     public void shouldDisplayListOfOptions() {
         View view = new View(null);
-        MainMenu mainMenu = new MainMenu(new String[]{"List Books", "Quit"}, view);
+        BasicMainMenu basicMainMenu = new BasicMainMenu(new String[]{"List Books", "Quit"}, view, null, null);
 
-        mainMenu.displayOptions();
+        basicMainMenu.displayOptions();
         String actualOutput = outputStream.toString();
 
         assertThat(actualOutput, startsWith("1. List Books\n2. Quit\n"));
@@ -36,9 +36,9 @@ public class MainMenuTest {
     public void shouldDisplayInvalidMessageWhenInvalidOptionIsSelected() {
         ByteArrayInputStream inputStream = new ByteArrayInputStream("3".getBytes());
         View view = new View(new Scanner(inputStream));
-        MainMenu mainMenu = new MainMenu(new String[]{"List Books", "Quit"}, view);
+        BasicMainMenu basicMainMenu = new BasicMainMenu(new String[]{"List Books", "Quit"}, view, null, null);
 
-        mainMenu.selectedOption();
+        basicMainMenu.selectedOption();
         String actualResponse = outputStream.toString();
 
         assertThat(actualResponse, endsWith("Select a valid option!\n"));
@@ -48,9 +48,9 @@ public class MainMenuTest {
     public void shouldReturnMinusOneWhenInvalidOptionIsSelected() {
         ByteArrayInputStream inputStream = new ByteArrayInputStream("7".getBytes());
         View view = new View(new Scanner(inputStream));
-        MainMenu mainMenu = new MainMenu(new String[]{"List Books", "Quit"}, view);
+        BasicMainMenu basicMainMenu = new BasicMainMenu(new String[]{"List Books", "Quit"}, view, null, null);
 
-        int actualSelectedOption = mainMenu.selectedOption();
+        int actualSelectedOption = basicMainMenu.selectedOption();
 
         assertThat(actualSelectedOption, is(equalTo(-1)));
     }
@@ -60,9 +60,9 @@ public class MainMenuTest {
     public void shouldReturnSelectedOptionNumberWhenAValidOptionIsSelected() {
         ByteArrayInputStream inputStream = new ByteArrayInputStream("1".getBytes());
         View view = new View(new Scanner(inputStream));
-        MainMenu mainMenu = new MainMenu(new String[]{"List Books", "Quit"}, view);
+        BasicMainMenu basicMainMenu = new BasicMainMenu(new String[]{"List Books", "Quit"}, view, null, null);
 
-        int actualSelectedOption = mainMenu.selectedOption();
+        int actualSelectedOption = basicMainMenu.selectedOption();
 
         assertThat(actualSelectedOption, is(equalTo(1)));
     }

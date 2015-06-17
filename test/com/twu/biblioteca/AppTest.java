@@ -45,10 +45,10 @@ public class AppTest {
                 .getBytes());
         Scanner scanner = new Scanner(inputStream);
         View view = new View(scanner);
-        MainMenu mainMenu = new MainMenu(new String[]{LIST_BOOKS, LIST_MOVIES,
-                CHECK_OUT_BOOK, CHECK_OUT_MOVIE, RETURN_BOOK, QUIT}, view);
+        BasicMainMenu basicMainMenu = new BasicMainMenu(new String[]{LIST_BOOKS, LIST_MOVIES,
+                CHECK_OUT_BOOK, CHECK_OUT_MOVIE, RETURN_BOOK, QUIT}, view, null, null);
         Library library = new Library(null, null, null);
-        app = new App(mainMenu, library, null, view);
+        app = new App(basicMainMenu, library, null, view);
 
         int actualSelectedOption = app.getUserOption();
 
@@ -62,10 +62,10 @@ public class AppTest {
                 .getBytes());
         Scanner scanner = new Scanner(inputStream);
         View view = new View(scanner);
-        MainMenu mainMenu = new MainMenu(new String[]{LIST_BOOKS, LIST_MOVIES,
-                CHECK_OUT_BOOK, CHECK_OUT_MOVIE, RETURN_BOOK, QUIT}, view);
+        BasicMainMenu basicMainMenu = new BasicMainMenu(new String[]{LIST_BOOKS, LIST_MOVIES,
+                CHECK_OUT_BOOK, CHECK_OUT_MOVIE, RETURN_BOOK, QUIT}, view, null, null);
         Library library = new Library(view, null, null);
-        app = new App(mainMenu, library, null, view);
+        app = new App(basicMainMenu, library, null, view);
 
         app.getUserOption();
         String actualResult = outputStream.toString();
@@ -79,11 +79,11 @@ public class AppTest {
                 .getBytes());
         Scanner scanner = new Scanner(inputStream);
         View view = new View(scanner);
-        MainMenu mainMenu = new MainMenu(new String[]{LIST_BOOKS, LIST_MOVIES,
-                CHECK_OUT_BOOK, CHECK_OUT_MOVIE, RETURN_BOOK, RETURN_MOVIE,
-                QUIT}, view);
         Library library = mock(Library.class);
-        app = new App(mainMenu, library, null, view);
+        BasicMainMenu basicMainMenu = new BasicMainMenu(new String[]{LIST_BOOKS, LIST_MOVIES,
+                CHECK_OUT_BOOK, CHECK_OUT_MOVIE, RETURN_BOOK, RETURN_MOVIE,
+                QUIT}, view, library, null);
+        app = new App(basicMainMenu, library, null, view);
 
         app.start();
 
@@ -96,11 +96,11 @@ public class AppTest {
                 .getBytes());
         Scanner scanner = new Scanner(inputStream);
         View view = new View(scanner);
-        MainMenu mainMenu = new MainMenu(new String[]{LIST_BOOKS, LIST_MOVIES,
-                CHECK_OUT_BOOK, CHECK_OUT_MOVIE, RETURN_BOOK, RETURN_MOVIE,
-                QUIT}, view);
         Library library = mock(Library.class);
-        app = new App(mainMenu, library, null, view);
+        BasicMainMenu basicMainMenu = new BasicMainMenu(new String[]{LIST_BOOKS, LIST_MOVIES,
+                CHECK_OUT_BOOK, CHECK_OUT_MOVIE, RETURN_BOOK, RETURN_MOVIE,
+                QUIT}, view, library, null);
+        app = new App(basicMainMenu, library, null, view);
 
         app.start();
 
@@ -113,11 +113,11 @@ public class AppTest {
                 .getBytes());
         Scanner scanner = new Scanner(inputStream);
         View view = new View(scanner);
-        MainMenu mainMenu = new MainMenu(new String[]{LIST_BOOKS, LIST_MOVIES,
+        BasicMainMenu basicMainMenu = new BasicMainMenu(new String[]{LIST_BOOKS, LIST_MOVIES,
                 CHECK_OUT_BOOK, CHECK_OUT_MOVIE, RETURN_BOOK, RETURN_MOVIE,
-                QUIT}, view);
+                QUIT}, view, null, null);
         Library library = new Library(view, null, null);
-        app = new App(mainMenu, library, null, view);
+        app = new App(basicMainMenu, library, null, view);
 
         app.start();
         String actualOutput = outputStream.toString();
@@ -131,12 +131,12 @@ public class AppTest {
                 ("3\nC\n7\n".getBytes());
         Scanner scanner = new Scanner(inputStream);
         View view = new View(scanner);
-        MainMenu mainMenu = new MainMenu(new String[]{LIST_BOOKS, LIST_MOVIES,
-                CHECK_OUT_BOOK, CHECK_OUT_MOVIE, RETURN_BOOK, RETURN_MOVIE,
-                QUIT}, view);
         Library library = mock(Library.class);
         Librarian librarian = mock(Librarian.class);
-        app = new App(mainMenu, library, librarian, view);
+        BasicMainMenu basicMainMenu = new BasicMainMenu(new String[]{LIST_BOOKS, LIST_MOVIES,
+                CHECK_OUT_BOOK, CHECK_OUT_MOVIE, RETURN_BOOK, RETURN_MOVIE,
+                QUIT}, view, library, librarian);
+        app = new App(basicMainMenu, library, librarian, view);
 
         app.start();
 
@@ -149,12 +149,12 @@ public class AppTest {
                 ("4\nInterstellar\n7\n".getBytes());
         Scanner scanner = new Scanner(inputStream);
         View view = new View(scanner);
-        MainMenu mainMenu = new MainMenu(new String[]{LIST_BOOKS, LIST_MOVIES,
-                CHECK_OUT_BOOK, CHECK_OUT_MOVIE, RETURN_BOOK, RETURN_MOVIE,
-                QUIT}, view);
         Library library = mock(Library.class);
         Librarian librarian = mock(Librarian.class);
-        app = new App(mainMenu, library, librarian, view);
+        BasicMainMenu basicMainMenu = new BasicMainMenu(new String[]{LIST_BOOKS, LIST_MOVIES,
+                CHECK_OUT_BOOK, CHECK_OUT_MOVIE, RETURN_BOOK, RETURN_MOVIE,
+                QUIT}, view, library, librarian);
+        app = new App(basicMainMenu, library, librarian, view);
 
         app.start();
 
@@ -167,12 +167,12 @@ public class AppTest {
                 ("3\nC\n5\nC\n7".getBytes());
         Scanner scanner = new Scanner(inputStream);
         View view = new View(scanner);
-        MainMenu mainMenu = new MainMenu(new String[]{LIST_BOOKS, LIST_MOVIES,
-                CHECK_OUT_BOOK, CHECK_OUT_MOVIE, RETURN_BOOK, RETURN_MOVIE,
-                QUIT}, view);
         Library library = mock(Library.class);
         Librarian librarian = mock(Librarian.class);
-        app = new App(mainMenu, library, librarian, view);
+        BasicMainMenu basicMainMenu = new BasicMainMenu(new String[]{LIST_BOOKS, LIST_MOVIES,
+                CHECK_OUT_BOOK, CHECK_OUT_MOVIE, RETURN_BOOK, RETURN_MOVIE,
+                QUIT}, view, library, librarian);
+        app = new App(basicMainMenu, library, librarian, view);
 
         app.start();
 
@@ -185,12 +185,12 @@ public class AppTest {
                 ("4\nInterstellar\n6\nInterstellar\n7".getBytes());
         Scanner scanner = new Scanner(inputStream);
         View view = new View(scanner);
-        MainMenu mainMenu = new MainMenu(new String[]{LIST_BOOKS, LIST_MOVIES,
-                CHECK_OUT_BOOK, CHECK_OUT_MOVIE, RETURN_BOOK, RETURN_MOVIE,
-                QUIT}, view);
         Library library = mock(Library.class);
         Librarian librarian = mock(Librarian.class);
-        app = new App(mainMenu, library, librarian, view);
+        BasicMainMenu basicMainMenu = new BasicMainMenu(new String[]{LIST_BOOKS, LIST_MOVIES,
+                CHECK_OUT_BOOK, CHECK_OUT_MOVIE, RETURN_BOOK, RETURN_MOVIE,
+                QUIT}, view, library, librarian);
+        app = new App(basicMainMenu, library, librarian, view);
 
         app.start();
 
