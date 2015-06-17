@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static com.twu.biblioteca.Messages.RETURN_BOOK_ERROR;
 import static org.junit.Assert.assertEquals;
 
 public class LibraryTest {
@@ -41,16 +40,16 @@ public class LibraryTest {
     }
 
     @Test
-    public void checkedOutBookShouldNotBeAvailableInLibrary() {
+    public void addingANewMovieToLibraryShouldDisplayItInAvailableList() {
         Library library = new Library(view, availableBooks, availableMovies);
-        Librarian librarian = new Librarian(new ArrayList<Book>(), null, library, view);
-        librarian.checkOutBook("Algorithms");
-        library.displayAvailableBooks();
-        String actualBooksList = outputStream.toString();
+        library.addMovie(new Movie("Interstellar", 2014, "Nolan", 10.0));
 
-        assertEquals("Thank you! Enjoy the book\n1 Physics Michio 2009\n" +
-                "2 C Dennis 1982\n", actualBooksList);
+        library.displayAvailableMovies();
+        String actualMoviesList = outputStream.toString();
+
+        assertEquals("1 Interstellar 2014 Nolan 10.0\n", actualMoviesList);
     }
+
 
     @Test
     public void shouldRemoveABookFromLibrary() {
@@ -65,38 +64,14 @@ public class LibraryTest {
     }
 
     @Test
-    public void shouldPrintMessageOnSuccessfulCheckoutOfABook() {
+    public void shouldRemoveAMovieFromLibrary() {
+        availableMovies.add(new Movie("Interstellar", 2014, "Nolan", 10));
         Library library = new Library(view, availableBooks, availableMovies);
-        Librarian librarian = new Librarian(new ArrayList<Book>(), null, library, view);
-        librarian.checkOutBook("Algorithms");
+        library.removeMovie("Interstellar");
+        library.displayAvailableMovies();
         String actualOutput = outputStream.toString();
 
-        assertEquals("Thank you! Enjoy the book\n", actualOutput);
-    }
-
-    @Test
-    public void shouldPrintMessageOnUnsuccessfulCheckoutOfABook() {
-        Library library = new Library(view, availableBooks, availableMovies);
-        library.addBook(new Book("Algorithms", "Cormen", 2014));
-        Librarian librarian = new Librarian(new ArrayList<Book>(), null, library, view);
-        librarian.checkOutBook("Apple Mac");
-        String actualOutput = outputStream.toString();
-
-        assertEquals("That book is not available\n", actualOutput);
-    }
-
-    @Test
-    public void returnedBookShouldNotBeInCheckedOutBooks() {
-        Library library = new Library(view, availableBooks, availableMovies);
-        Librarian librarian = new Librarian(new ArrayList<Book>(), null, library, view);
-        librarian.checkOutBook("C");
-        librarian.returnBook("C");
-        librarian.returnBook("C");
-
-        String actualOutput = outputStream.toString();
-
-        assertEquals("Thank you! Enjoy the book\n" +
-                "Thank you for returning the book\n" + RETURN_BOOK_ERROR + "\n", actualOutput);
+        assertEquals("", actualOutput);
     }
 
     @Test

@@ -36,6 +36,10 @@ public class App {
                 view.display(Messages.RETURN_BOOK_PROMPT);
                 view.readLine();
                 librarian.returnBook(view.readLine());
+            } else if (optionSelectedByUser == 6) {
+                view.display(Messages.RETURN_MOVIE_PROMPT);
+                view.readLine();
+                librarian.returnMovie(view.readLine());
             } else
                 return;
         }

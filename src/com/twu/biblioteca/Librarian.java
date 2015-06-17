@@ -53,4 +53,18 @@ public class Librarian {
         }
         view.display(Messages.RETURN_BOOK_ERROR);
     }
+
+    public void returnMovie(String movieTitle) {
+        int index = 0;
+        for (; index < checkedOutMovies.size(); index++) {
+            Movie movie = checkedOutMovies.get(index);
+            if (movie.hashCode() == movieTitle.hashCode()) {
+                checkedOutMovies.remove(movie);
+                library.addMovie(movie);
+                view.display(Messages.RETURN_MOVIE_THANK_YOU);
+                return;
+            }
+        }
+        view.display(Messages.RETURN_MOVIE_ERROR);
+    }
 }

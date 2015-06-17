@@ -16,7 +16,7 @@
     </target>
     
     <target name="run">
-        <java classpath="out/production/biblioteca" classname="com.twu.biblioteca.EntryPoint"/>
+        <java classpath="out/src/classes" classname="com.twu.biblioteca.EntryPoint"/>
     </target> 
     <target name="compileTests">
         <mkdir dir="out/test/classes"/>

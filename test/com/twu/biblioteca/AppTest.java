@@ -86,11 +86,11 @@ public class AppTest {
 
     @Test
     public void shouldStartBibliotecaAndDisplayBooksIfSelected() {
-        ByteArrayInputStream inputStream = new ByteArrayInputStream("1\n6\n".getBytes());
+        ByteArrayInputStream inputStream = new ByteArrayInputStream("1\n7\n".getBytes());
         Scanner scanner = new Scanner(inputStream);
         View view = new View(scanner);
         MainMenu mainMenu = new MainMenu(new String[]{Messages.LIST_BOOKS, Messages.LIST_MOVIES,
-                Messages.CHECK_OUT_BOOK, Messages.CHECK_OUT_MOVIE, Messages.RETURN_BOOK, Messages.QUIT}, view);
+                Messages.CHECK_OUT_BOOK, Messages.CHECK_OUT_MOVIE, Messages.RETURN_BOOK, Messages.RETURN_MOVIE, Messages.QUIT}, view);
         Library library = mock(Library.class);
         app = new App(mainMenu, library, null, view);
 
@@ -101,11 +101,11 @@ public class AppTest {
 
     @Test
     public void shouldStartBibliotecaAndDisplayMoviesIfSelected() {
-        ByteArrayInputStream inputStream = new ByteArrayInputStream("2\n6\n".getBytes());
+        ByteArrayInputStream inputStream = new ByteArrayInputStream("2\n7\n".getBytes());
         Scanner scanner = new Scanner(inputStream);
         View view = new View(scanner);
         MainMenu mainMenu = new MainMenu(new String[]{Messages.LIST_BOOKS, Messages.LIST_MOVIES,
-                Messages.CHECK_OUT_BOOK, Messages.CHECK_OUT_MOVIE, Messages.RETURN_BOOK, Messages.QUIT}, view);
+                Messages.CHECK_OUT_BOOK, Messages.CHECK_OUT_MOVIE, Messages.RETURN_BOOK, Messages.RETURN_MOVIE, Messages.QUIT}, view);
         Library library = mock(Library.class);
         app = new App(mainMenu, library, null, view);
 
@@ -116,11 +116,11 @@ public class AppTest {
 
     @Test
     public void shouldStartBibliotecaAndQuitIfSelected() {
-        ByteArrayInputStream inputStream = new ByteArrayInputStream("6".getBytes());
+        ByteArrayInputStream inputStream = new ByteArrayInputStream("7".getBytes());
         Scanner scanner = new Scanner(inputStream);
         View view = new View(scanner);
         MainMenu mainMenu = new MainMenu(new String[]{Messages.LIST_BOOKS, Messages.LIST_MOVIES,
-                Messages.CHECK_OUT_BOOK, Messages.CHECK_OUT_MOVIE, Messages.RETURN_BOOK, Messages.QUIT}, view);
+                Messages.CHECK_OUT_BOOK, Messages.CHECK_OUT_MOVIE, Messages.RETURN_BOOK, Messages.RETURN_MOVIE, Messages.QUIT}, view);
         Library library = new Library(view, null, null);
         app = new App(mainMenu, library, null, view);
 
@@ -133,17 +133,18 @@ public class AppTest {
                 "3. Check Out Book\n" +
                 "4. Check Out Movie\n" +
                 "5. Return Book\n" +
-                "6. Quit\n" +
+                "6. Return Movie\n" +
+                "7. Quit\n" +
                 "Select an option : \n")));
     }
 
     @Test
     public void shouldStartBibliotecaAndCheckOutBookIfSelected() {
-        ByteArrayInputStream inputStream = new ByteArrayInputStream("3\nC\n6\n".getBytes());
+        ByteArrayInputStream inputStream = new ByteArrayInputStream("3\nC\n7\n".getBytes());
         Scanner scanner = new Scanner(inputStream);
         View view = new View(scanner);
         MainMenu mainMenu = new MainMenu(new String[]{Messages.LIST_BOOKS, Messages.LIST_MOVIES,
-                Messages.CHECK_OUT_BOOK, Messages.CHECK_OUT_MOVIE, Messages.RETURN_BOOK, Messages.QUIT}, view);
+                Messages.CHECK_OUT_BOOK, Messages.CHECK_OUT_MOVIE, Messages.RETURN_BOOK, Messages.RETURN_MOVIE, Messages.QUIT}, view);
         Library library = mock(Library.class);
         Librarian librarian = mock(Librarian.class);
         app = new App(mainMenu, library, librarian, view);
@@ -155,11 +156,11 @@ public class AppTest {
 
     @Test
     public void shouldStartBibliotecaAndCheckOutMovieIfSelected() {
-        ByteArrayInputStream inputStream = new ByteArrayInputStream("4\nInterstellar\n6\n".getBytes());
+        ByteArrayInputStream inputStream = new ByteArrayInputStream("4\nInterstellar\n7\n".getBytes());
         Scanner scanner = new Scanner(inputStream);
         View view = new View(scanner);
         MainMenu mainMenu = new MainMenu(new String[]{Messages.LIST_BOOKS, Messages.LIST_MOVIES,
-                Messages.CHECK_OUT_BOOK, Messages.CHECK_OUT_MOVIE, Messages.RETURN_BOOK, Messages.QUIT}, view);
+                Messages.CHECK_OUT_BOOK, Messages.CHECK_OUT_MOVIE, Messages.RETURN_BOOK, Messages.RETURN_MOVIE, Messages.QUIT}, view);
         Library library = mock(Library.class);
         Librarian librarian = mock(Librarian.class);
         app = new App(mainMenu, library, librarian, view);
@@ -171,11 +172,11 @@ public class AppTest {
 
     @Test
     public void shouldStartBibliotecaAndReturnBookIfSelected() {
-        ByteArrayInputStream inputStream = new ByteArrayInputStream("3\nC\n5\nC\n6".getBytes());
+        ByteArrayInputStream inputStream = new ByteArrayInputStream("3\nC\n5\nC\n7".getBytes());
         Scanner scanner = new Scanner(inputStream);
         View view = new View(scanner);
         MainMenu mainMenu = new MainMenu(new String[]{Messages.LIST_BOOKS, Messages.LIST_MOVIES,
-                Messages.CHECK_OUT_BOOK, Messages.CHECK_OUT_MOVIE, Messages.RETURN_BOOK, Messages.QUIT}, view);
+                Messages.CHECK_OUT_BOOK, Messages.CHECK_OUT_MOVIE, Messages.RETURN_BOOK, Messages.RETURN_MOVIE, Messages.QUIT}, view);
         Library library = mock(Library.class);
         Librarian librarian = mock(Librarian.class);
         app = new App(mainMenu, library, librarian, view);

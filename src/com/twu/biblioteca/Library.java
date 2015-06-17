@@ -61,4 +61,8 @@ public class Library {
                 break;
         availableMovies.remove(index);
     }
+
+    public void addMovie(Movie movie) {
+        availableMovies.add(movie);
+    }
 }
