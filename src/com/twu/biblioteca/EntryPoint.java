@@ -24,7 +24,8 @@ public class EntryPoint {
         Authenticator authenticator = new Authenticator(view);
         Menu startMenu = new StartMenu(startMenuOptions, view, authenticator, library, librarian);
         UserMenu userMenu = new UserMenu(userMenuOptions, view, authenticator, library, librarian);
-        Menu[] menus = {startMenu, userMenu};
+        LibrarianMenu librarianMenu = new LibrarianMenu(librarianMenuOptions, view, authenticator, library, librarian);
+        Menu[] menus = {startMenu, userMenu, librarianMenu};
         App app = new App(menus, library, librarian, view);
         app.start();
     }
