@@ -23,4 +23,5 @@ public interface Messages {
     String RETURN_MOVIE = "Return Movie";
     String RETURN_MOVIE_THANK_YOU = "Thank you for returning the movie";
     String RETURN_MOVIE_ERROR = "That is not a valid movie to return";
+    String LOGIN = "Login";
 }

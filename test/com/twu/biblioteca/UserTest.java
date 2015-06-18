@@ -62,4 +62,13 @@ public class UserTest {
 
         assertThat(twoUsersAreEqualThenHashCodesAreSame, is(equalTo(true)));
     }
+
+    @Test
+    public void shouldReturnInfoAboutUser() {
+        User user = new User("Jaswanth", "aj.jaswanth@gmail.com", 12345);
+
+        String actualOutput = user.toString();
+
+        assertEquals("Jaswanth aj.jaswanth@gmail.com 12345", actualOutput);
+    }
 }

@@ -18,9 +18,11 @@ public class EntryPoint {
                 new Movie("The Pursuit of Happyness", 2003, "Will Smith", 10.0)));
         Library library = new Library(view, availableBooks, availableMovies);
         Librarian librarian = new Librarian(new ArrayList<Book>(), new ArrayList<Movie>(), library, view);
-        BasicMainMenu basicMainMenu = new BasicMainMenu(new String[]{LIST_BOOKS, LIST_MOVIES,
-                CHECK_OUT_BOOK, CHECK_OUT_MOVIE, RETURN_BOOK, RETURN_MOVIE, QUIT}, view, library, librarian);
-        App app = new App(basicMainMenu, library, librarian, view);
+        String[] startMenuOptions = new String[]{LIST_BOOKS, LIST_MOVIES, LOGIN, QUIT};
+
+        Menu startMenu = new StartMenu(startMenuOptions, view, library, librarian);
+        Menu[] menus = {startMenu, null, null};
+        App app = new App(menus, library, librarian, view);
         app.start();
     }
 }

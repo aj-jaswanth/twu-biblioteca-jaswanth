@@ -4,25 +4,30 @@ import static com.twu.biblioteca.Messages.WELCOME_MESSAGE;
 
 public class App {
 
-    private BasicMainMenu basicMainMenu;
     private Library library;
     private View view;
     private Librarian librarian;
-    private BasicMainMenu[] basicMainMenus;
+    private Menu[] menus;
+    private Menu currentMenu;
 
-    public App(BasicMainMenu basicMainMenu, Library library, Librarian librarian, View view) {
-        this.basicMainMenu = basicMainMenu;
+    public App(Menu[] menus, Library library, Librarian librarian, View view) {
+        this.menus = menus;
         this.library = library;
         this.view = view;
         this.librarian = librarian;
     }
 
     public void start() {
+        setStartMenu();
         welcomeUser();
         while (true) {
-            if (basicMainMenu.processOption(getUserOption()) == -1)
+            if (currentMenu.processOption(getUserOption()) == -1)
                 return;
         }
+    }
+
+    private void setStartMenu() {
+        currentMenu = menus[0];
     }
 
     public void welcomeUser() {
@@ -32,8 +37,8 @@ public class App {
     public int getUserOption() {
         int selectedOption;
         while (true) {
-            basicMainMenu.displayOptions();
-            selectedOption = basicMainMenu.selectedOption();
+            currentMenu.displayOptions();
+            selectedOption = currentMenu.selectedOption();
             if (selectedOption == -1)
                 continue;
             return selectedOption;
