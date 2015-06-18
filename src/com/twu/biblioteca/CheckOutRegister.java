@@ -13,6 +13,10 @@ public class CheckOutRegister {
         register.remove(description);
     }
 
+    public boolean isValidReturn(String description) {
+        return register.contains(description);
+    }
+
     @Override
     public String toString() {
         String description = "";

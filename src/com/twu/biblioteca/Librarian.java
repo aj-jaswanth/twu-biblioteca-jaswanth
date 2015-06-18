@@ -52,7 +52,7 @@ public class Librarian {
         int index = 0;
         for (; index < checkedOutBooks.size(); index++) {
             Book book = checkedOutBooks.get(index);
-            if (book.hashCode() == bookTitle.hashCode()) {
+            if (book.hashCode() == bookTitle.hashCode() && checkOutRegister.isValidReturn(authenticator.currentUserId() + " " + bookTitle)) {
                 checkedOutBooks.remove(book);
                 library.addBook(book);
                 view.display(RETURN_BOOK_THANK_YOU);
@@ -67,7 +67,7 @@ public class Librarian {
         int index = 0;
         for (; index < checkedOutMovies.size(); index++) {
             Movie movie = checkedOutMovies.get(index);
-            if (movie.hashCode() == movieTitle.hashCode()) {
+            if (movie.hashCode() == movieTitle.hashCode() && checkOutRegister.isValidReturn(authenticator.currentUserId() + " " + movieTitle)) {
                 checkedOutMovies.remove(movie);
                 library.addMovie(movie);
                 view.display(RETURN_MOVIE_THANK_YOU);
