@@ -1,24 +1,22 @@
 package com.twu.biblioteca;
 
-import static com.twu.biblioteca.Messages.MENU_SELECT_INVALID;
-import static com.twu.biblioteca.Messages.MENU_SELECT_PROMPT;
+import static com.twu.biblioteca.Messages.*;
 
-public class StartMenu implements Menu {
-
+public class UserMenu implements Menu {
     private final String[] options;
     private final View view;
     private final Library library;
     private final Librarian librarian;
-    private final Authenticator authenticator;
     private App app;
+    private Authenticator authenticator;
     private User currentUser;
 
-    public StartMenu(String[] options, View view, Authenticator authenticator, Library library, Librarian librarian) {
+    public UserMenu(String[] options, View view, Authenticator authenticator, Library library, Librarian librarian) {
         this.options = options;
         this.view = view;
-        this.authenticator = authenticator;
         this.library = library;
         this.librarian = librarian;
+        this.authenticator = authenticator;
     }
 
     @Override
@@ -38,11 +36,6 @@ public class StartMenu implements Menu {
     }
 
     @Override
-    public void registerApp(App app) {
-        this.app = app;
-    }
-
-    @Override
     public int processOption(int selectedOption) {
         switch (selectedOption) {
             case 1:
@@ -53,16 +46,37 @@ public class StartMenu implements Menu {
                 library.displayAvailableMovies();
                 break;
             case 3:
+                view.display(CHECK_OUT_BOOK_PROMPT);
                 view.readLine();
-                int userLevel = authenticator.authenticate();
-                if (userLevel == 1)
-                    app.useUserMenu();
-                else if (userLevel == 2)
-                    app.useLibrarianMenu();
+                librarian.checkOutBook(view.readLine());
                 break;
             case 4:
-                return -1;
+                view.display(CHECK_OUT_MOVIE_PROMPT);
+                view.readLine();
+                librarian.checkOutMovie(view.readLine());
+                break;
+            case 5:
+                view.display(RETURN_BOOK_PROMPT);
+                view.readLine();
+                librarian.returnBook(view.readLine());
+                break;
+            case 6:
+                view.display(RETURN_MOVIE_PROMPT);
+                view.readLine();
+                librarian.returnMovie(view.readLine());
+                break;
+            case 7:
+                view.display(authenticator.currentUser() + "");
+                break;
+            case 8:
+                app.useStartMenu();
+                break;
         }
         return 0;
+    }
+
+    @Override
+    public void registerApp(App app) {
+        this.app = app;
     }
 }

@@ -7,4 +7,6 @@ public interface Menu {
     int selectedOption();
 
     int processOption(int selectedOption);
+
+    void registerApp(App app);
 }

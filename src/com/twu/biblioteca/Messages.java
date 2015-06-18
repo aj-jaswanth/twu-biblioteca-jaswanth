@@ -24,4 +24,10 @@ public interface Messages {
     String RETURN_MOVIE_THANK_YOU = "Thank you for returning the movie";
     String RETURN_MOVIE_ERROR = "That is not a valid movie to return";
     String LOGIN = "Login";
+    String LOGOUT = "Logout";
+    String ABOUT_USER = "About you";
+    String SHOW_HISTORY = "View checked out items";
+    String LOGIN_ID_PROMPT = "Enter your library Id : ";
+    String LOGIN_PASSWORD_PROMPT = "Enter your password : ";
+    String LOGIN_FAILED = "Invalid login!";
 }

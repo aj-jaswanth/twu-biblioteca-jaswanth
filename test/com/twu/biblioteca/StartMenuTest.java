@@ -29,7 +29,7 @@ public class StartMenuTest {
     public void shouldReturnSelectedOptionIfValid() {
         ByteArrayInputStream inputContent = new ByteArrayInputStream("4".getBytes());
         View view = new View(new Scanner(inputContent));
-        StartMenu startMenu = new StartMenu(startMenuOptions, view, null, null);
+        StartMenu startMenu = new StartMenu(startMenuOptions, view, null, null, null);
 
         int actualOption = startMenu.selectedOption();
 
@@ -40,7 +40,7 @@ public class StartMenuTest {
     public void shouldReturnMinuOneIfInvalidOptionIsEntered() {
         ByteArrayInputStream inputContent = new ByteArrayInputStream("5".getBytes());
         View view = new View(new Scanner(inputContent));
-        StartMenu startMenu = new StartMenu(startMenuOptions, view, null, null);
+        StartMenu startMenu = new StartMenu(startMenuOptions, view, null, null, null);
 
         int actualOption = startMenu.selectedOption();
 
@@ -51,7 +51,7 @@ public class StartMenuTest {
     public void shouldDisplayOptions() {
         ByteArrayInputStream inputContent = new ByteArrayInputStream("4".getBytes());
         View view = new View(new Scanner(inputContent));
-        StartMenu startMenu = new StartMenu(startMenuOptions, view, null, null);
+        StartMenu startMenu = new StartMenu(startMenuOptions, view, null, null, null);
 
         int actualOption = startMenu.selectedOption();
 
@@ -61,7 +61,7 @@ public class StartMenuTest {
     @Test
     public void shouldDisplayAvailableBooks() {
         Library library = mock(Library.class);
-        StartMenu startMenu = new StartMenu(startMenuOptions, null, library, null);
+        StartMenu startMenu = new StartMenu(startMenuOptions, null, null, library, null);
 
         startMenu.processOption(1);
 
@@ -72,9 +72,9 @@ public class StartMenuTest {
     public void shouldDisplayAvailableMovies() {
         View view = mock(View.class);
         Library library = mock(Library.class);
-        StartMenu startMenu = new StartMenu(startMenuOptions, view, library, null);
+        StartMenu startMenu = new StartMenu(startMenuOptions, view, null, library, null);
         when(view.readLine()).thenReturn("");
-        
+
         startMenu.processOption(2);
 
         verify(library, times(1)).displayAvailableMovies();

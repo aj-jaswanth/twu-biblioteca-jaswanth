@@ -18,7 +18,8 @@ public class App {
     }
 
     public void start() {
-        setStartMenu();
+        registerAppWithMenus();
+        useStartMenu();
         welcomeUser();
         while (true) {
             if (currentMenu.processOption(getUserOption()) == -1)
@@ -26,8 +27,21 @@ public class App {
         }
     }
 
-    private void setStartMenu() {
+    private void registerAppWithMenus() {
+        for (Menu menu : menus)
+            menu.registerApp(this);
+    }
+
+    public void useStartMenu() {
         currentMenu = menus[0];
+    }
+
+    public void useUserMenu() {
+        currentMenu = menus[1];
+    }
+
+    public void useLibrarianMenu() {
+        currentMenu = menus[2];
     }
 
     public void welcomeUser() {

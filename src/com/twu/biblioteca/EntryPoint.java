@@ -19,9 +19,12 @@ public class EntryPoint {
         Library library = new Library(view, availableBooks, availableMovies);
         Librarian librarian = new Librarian(new ArrayList<Book>(), new ArrayList<Movie>(), library, view);
         String[] startMenuOptions = new String[]{LIST_BOOKS, LIST_MOVIES, LOGIN, QUIT};
-
-        Menu startMenu = new StartMenu(startMenuOptions, view, library, librarian);
-        Menu[] menus = {startMenu, null, null};
+        String[] userMenuOptions = {LIST_BOOKS, LIST_MOVIES, CHECK_OUT_BOOK, CHECK_OUT_MOVIE, RETURN_BOOK, RETURN_MOVIE, ABOUT_USER, LOGOUT};
+        String[] librarianMenuOptions = {LIST_BOOKS, LIST_MOVIES, CHECK_OUT_BOOK, CHECK_OUT_MOVIE, RETURN_BOOK, RETURN_MOVIE, ABOUT_USER, SHOW_HISTORY, LOGOUT};
+        Authenticator authenticator = new Authenticator(view);
+        Menu startMenu = new StartMenu(startMenuOptions, view, authenticator, library, librarian);
+        UserMenu userMenu = new UserMenu(userMenuOptions, view, authenticator, library, librarian);
+        Menu[] menus = {startMenu, userMenu};
         App app = new App(menus, library, librarian, view);
         app.start();
     }
