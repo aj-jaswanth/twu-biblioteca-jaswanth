@@ -21,18 +21,22 @@ public class LibrarianTest {
     private List<Movie> availableMovies = new ArrayList<Movie>(Arrays.asList(new Movie("Interstellar", 2014, "Christopher Nolan", 10.0),
             new Movie("Die Hard 4", 2009, "Bruce Wills", 10.0),
             new Movie("The Pursuit of Happyness", 2003, "Will Smith", 10.0)));
+    private Authenticator authenticator;
+    private CheckOutRegister checkOutRegister;
 
     @Before
     public void setUp() {
         outputContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outputContent));
         view = new View(null);
+        this.authenticator = new Authenticator(null);
+        this.checkOutRegister = new CheckOutRegister();
     }
 
     @Test
     public void shouldCheckOutTheGivenBook() {
         Library library = new Library(view, availableBooks, availableMovies);
-        Librarian librarian = new Librarian(new ArrayList<Book>(), null, library, view);
+        Librarian librarian = new Librarian(new ArrayList<Book>(), null, library, view, checkOutRegister, authenticator);
 
         librarian.checkOutBook("Physics");
         library.displayAvailableBooks();
@@ -45,7 +49,7 @@ public class LibrarianTest {
     @Test
     public void checkedOutBookShouldNotBeAvailableInLibrary() {
         Library library = new Library(view, availableBooks, availableMovies);
-        Librarian librarian = new Librarian(new ArrayList<Book>(), null, library, view);
+        Librarian librarian = new Librarian(new ArrayList<Book>(), null, library, view, checkOutRegister, authenticator);
         librarian.checkOutBook("Algorithms");
         library.displayAvailableBooks();
         String actualBooksList = outputContent.toString();
@@ -57,7 +61,7 @@ public class LibrarianTest {
     public void checkedOutMovieShouldNotBeAvailableInLibrary() {
         availableMovies = new ArrayList<Movie>(Collections.singletonList(new Movie("Interstellar", 2014, "Nolan", 10)));
         Library library = new Library(view, availableBooks, availableMovies);
-        Librarian librarian = new Librarian(null, new ArrayList<Movie>(), library, view);
+        Librarian librarian = new Librarian(null, new ArrayList<Movie>(), library, view, checkOutRegister, authenticator);
         librarian.checkOutMovie("Interstellar");
         library.displayAvailableMovies();
         String actualMoviesList = outputContent.toString();
@@ -69,7 +73,7 @@ public class LibrarianTest {
     @Test
     public void shouldCheckOutTheGivenMovie() {
         Library library = new Library(view, availableBooks, availableMovies);
-        Librarian librarian = new Librarian(null, new ArrayList<Movie>(), library, view);
+        Librarian librarian = new Librarian(null, new ArrayList<Movie>(), library, view, checkOutRegister, authenticator);
 
         librarian.checkOutMovie("Interstellar");
         library.displayAvailableMovies();
@@ -83,7 +87,7 @@ public class LibrarianTest {
     @Test
     public void shouldPrintErrorMessageWhenBookIsNotAvailable() {
         Library library = new Library(view, availableBooks, availableMovies);
-        Librarian librarian = new Librarian(new ArrayList<Book>(), null, library, view);
+        Librarian librarian = new Librarian(new ArrayList<Book>(), null, library, view, checkOutRegister, authenticator);
 
         librarian.checkOutBook("C#");
         String actualOutput = outputContent.toString();
@@ -96,7 +100,7 @@ public class LibrarianTest {
     public void shouldAddAReturnedBookToLibrary() {
         Library library = new Library(view, availableBooks, availableMovies);
         Librarian librarian = new Librarian(new ArrayList<Book>(Collections.singletonList(new Book("Physics", "Michio", 2009))),
-                null, library, view);
+                null, library, view, checkOutRegister, authenticator);
         librarian.checkOutBook("Physics");
         librarian.returnBook("Physics");
         library.displayAvailableBooks();
@@ -109,7 +113,7 @@ public class LibrarianTest {
     public void shouldPrintErrorOnInvalidBookReturn() {
         Library library = new Library(view, availableBooks, availableMovies);
         Librarian librarian = new Librarian(new ArrayList<Book>(),
-                null, library, view);
+                null, library, view, null, null);
 
         librarian.returnBook("C#");
         String actualOutput = outputContent.toString();
@@ -121,7 +125,7 @@ public class LibrarianTest {
     @Test
     public void shouldPrintMessageOnSuccessfulCheckoutOfABook() {
         Library library = new Library(view, availableBooks, availableMovies);
-        Librarian librarian = new Librarian(new ArrayList<Book>(), null, library, view);
+        Librarian librarian = new Librarian(new ArrayList<Book>(), null, library, view, checkOutRegister, authenticator);
         librarian.checkOutBook("Algorithms");
         String actualOutput = outputContent.toString();
 
@@ -132,7 +136,7 @@ public class LibrarianTest {
     public void shouldPrintMessageOnSuccessfulCheckoutOfAMovie() {
         availableMovies.add(new Movie("Interstellar", 2014, "Nolan", 10));
         Library library = new Library(view, availableBooks, availableMovies);
-        Librarian librarian = new Librarian(new ArrayList<Book>(), new ArrayList<Movie>(), library, view);
+        Librarian librarian = new Librarian(new ArrayList<Book>(), new ArrayList<Movie>(), library, view, checkOutRegister, authenticator);
         librarian.checkOutMovie("Interstellar");
         String actualOutput = outputContent.toString();
 
@@ -143,7 +147,7 @@ public class LibrarianTest {
     public void shouldPrintMessageOnUnsuccessfulCheckoutOfABook() {
         Library library = new Library(view, availableBooks, availableMovies);
         library.addBook(new Book("Algorithms", "Cormen", 2014));
-        Librarian librarian = new Librarian(new ArrayList<Book>(), null, library, view);
+        Librarian librarian = new Librarian(new ArrayList<Book>(), null, library, view, checkOutRegister, authenticator);
         librarian.checkOutBook("Apple Mac");
         String actualOutput = outputContent.toString();
 
@@ -153,7 +157,7 @@ public class LibrarianTest {
     @Test
     public void shouldPrintMessageOnUnsuccessfulCheckoutOfAMovie() {
         Library library = new Library(view, availableBooks, availableMovies);
-        Librarian librarian = new Librarian(new ArrayList<Book>(), null, library, view);
+        Librarian librarian = new Librarian(new ArrayList<Book>(), null, library, view, checkOutRegister, authenticator);
         librarian.checkOutMovie("Unstoppable");
         String actualOutput = outputContent.toString();
 
@@ -163,7 +167,7 @@ public class LibrarianTest {
     @Test
     public void returnedBookShouldNotBeInCheckedOutBooks() {
         Library library = new Library(view, availableBooks, availableMovies);
-        Librarian librarian = new Librarian(new ArrayList<Book>(), null, library, view);
+        Librarian librarian = new Librarian(new ArrayList<Book>(), null, library, view, checkOutRegister, authenticator);
         librarian.checkOutBook("C");
         librarian.returnBook("C");
         librarian.returnBook("C");
@@ -177,7 +181,7 @@ public class LibrarianTest {
     public void returnedBookShouldNotBeInCheckedOutMovies() {
         availableMovies.add(new Movie("Interstellar", 2014, "Nolan", 10));
         Library library = new Library(view, availableBooks, availableMovies);
-        Librarian librarian = new Librarian(null, new ArrayList<Movie>(), library, view);
+        Librarian librarian = new Librarian(null, new ArrayList<Movie>(), library, view, checkOutRegister, authenticator);
         librarian.checkOutMovie("Interstellar");
         librarian.returnMovie("Interstellar");
         librarian.returnMovie("Interstellar");

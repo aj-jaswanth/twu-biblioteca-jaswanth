@@ -17,14 +17,14 @@ public class EntryPoint {
                 new Movie("Die Hard 4", 2009, "Bruce Wills", 10.0),
                 new Movie("The Pursuit of Happyness", 2003, "Will Smith", 10.0)));
         Library library = new Library(view, availableBooks, availableMovies);
-        Librarian librarian = new Librarian(new ArrayList<Book>(), new ArrayList<Movie>(), library, view);
+        Librarian librarian = new Librarian(new ArrayList<Book>(), new ArrayList<Movie>(), library, view, null, null);
         String[] startMenuOptions = new String[]{LIST_BOOKS, LIST_MOVIES, LOGIN, QUIT};
         String[] userMenuOptions = {LIST_BOOKS, LIST_MOVIES, CHECK_OUT_BOOK, CHECK_OUT_MOVIE, RETURN_BOOK, RETURN_MOVIE, ABOUT_USER, LOGOUT};
         String[] librarianMenuOptions = {LIST_BOOKS, LIST_MOVIES, CHECK_OUT_BOOK, CHECK_OUT_MOVIE, RETURN_BOOK, RETURN_MOVIE, ABOUT_USER, SHOW_HISTORY, LOGOUT};
         Authenticator authenticator = new Authenticator(view);
         Menu startMenu = new StartMenu(startMenuOptions, view, authenticator, library, librarian);
         UserMenu userMenu = new UserMenu(userMenuOptions, view, authenticator, library, librarian);
-        LibrarianMenu librarianMenu = new LibrarianMenu(librarianMenuOptions, view, authenticator, library, librarian);
+        LibrarianMenu librarianMenu = new LibrarianMenu(librarianMenuOptions, view, authenticator, library, librarian, null);
         Menu[] menus = {startMenu, userMenu, librarianMenu};
         App app = new App(menus, library, librarian, view);
         app.start();

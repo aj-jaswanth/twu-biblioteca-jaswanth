@@ -10,13 +10,15 @@ public class LibrarianMenu implements Menu {
     private App app;
     private Authenticator authenticator;
     private User currentUser;
+    private CheckOutRegister checkOutRegister;
 
-    public LibrarianMenu(String[] options, View view, Authenticator authenticator, Library library, Librarian librarian) {
+    public LibrarianMenu(String[] options, View view, Authenticator authenticator, Library library, Librarian librarian, CheckOutRegister checkOutRegister) {
         this.options = options;
         this.view = view;
         this.library = library;
         this.librarian = librarian;
         this.authenticator = authenticator;
+        this.checkOutRegister = checkOutRegister;
     }
 
     @Override
@@ -69,7 +71,7 @@ public class LibrarianMenu implements Menu {
                 view.display(authenticator.currentUser() + "");
                 break;
             case 8:
-
+                view.display(checkOutRegister.toString());
                 break;
             case 9:
                 app.useStartMenu();

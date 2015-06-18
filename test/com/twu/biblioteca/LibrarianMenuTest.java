@@ -29,7 +29,7 @@ public class LibrarianMenuTest {
     public void shouldReturnSelectedOptionIfValid() {
         ByteArrayInputStream inputContent = new ByteArrayInputStream("4".getBytes());
         View view = new View(new Scanner(inputContent));
-        LibrarianMenu librarianMenu = new LibrarianMenu(librarianMenuOptions, view, null, null, null);
+        LibrarianMenu librarianMenu = new LibrarianMenu(librarianMenuOptions, view, null, null, null, null);
 
         int actualOption = librarianMenu.selectedOption();
 
@@ -40,7 +40,7 @@ public class LibrarianMenuTest {
     public void shouldReturnMinuOneIfInvalidOptionIsEntered() {
         ByteArrayInputStream inputContent = new ByteArrayInputStream("15".getBytes());
         View view = new View(new Scanner(inputContent));
-        LibrarianMenu librarianMenu = new LibrarianMenu(librarianMenuOptions, view, null, null, null);
+        LibrarianMenu librarianMenu = new LibrarianMenu(librarianMenuOptions, view, null, null, null, null);
 
         int actualOption = librarianMenu.selectedOption();
 
@@ -51,7 +51,7 @@ public class LibrarianMenuTest {
     public void shouldDisplayOptions() {
         ByteArrayInputStream inputContent = new ByteArrayInputStream("4".getBytes());
         View view = new View(new Scanner(inputContent));
-        LibrarianMenu librarianMenu = new LibrarianMenu(librarianMenuOptions, view, null, null, null);
+        LibrarianMenu librarianMenu = new LibrarianMenu(librarianMenuOptions, view, null, null, null, null);
 
         int actualOption = librarianMenu.selectedOption();
 
@@ -61,7 +61,7 @@ public class LibrarianMenuTest {
     @Test
     public void shouldDisplayAvailableBooks() {
         Library library = mock(Library.class);
-        LibrarianMenu librarianMenu = new LibrarianMenu(librarianMenuOptions, null, null, library, null);
+        LibrarianMenu librarianMenu = new LibrarianMenu(librarianMenuOptions, null, null, library, null, null);
 
         librarianMenu.processOption(1);
 
@@ -72,7 +72,7 @@ public class LibrarianMenuTest {
     public void shouldDisplayAvailableMovies() {
         View view = mock(View.class);
         Library library = mock(Library.class);
-        LibrarianMenu librarianMenu = new LibrarianMenu(librarianMenuOptions, view, null, library, null);
+        LibrarianMenu librarianMenu = new LibrarianMenu(librarianMenuOptions, view, null, library, null, null);
         when(view.readLine()).thenReturn("");
 
         librarianMenu.processOption(2);
@@ -85,7 +85,7 @@ public class LibrarianMenuTest {
         View view = mock(View.class);
         when(view.readLine()).thenReturn("");
         Librarian librarian = mock(Librarian.class);
-        LibrarianMenu librarianMenu = new LibrarianMenu(librarianMenuOptions, view, null, null, librarian);
+        LibrarianMenu librarianMenu = new LibrarianMenu(librarianMenuOptions, view, null, null, librarian, null);
 
         librarianMenu.processOption(3);
 
@@ -97,7 +97,7 @@ public class LibrarianMenuTest {
         View view = mock(View.class);
         when(view.readLine()).thenReturn("");
         Librarian librarian = mock(Librarian.class);
-        LibrarianMenu librarianMenu = new LibrarianMenu(librarianMenuOptions, view, null, null, librarian);
+        LibrarianMenu librarianMenu = new LibrarianMenu(librarianMenuOptions, view, null, null, librarian, null);
 
         librarianMenu.processOption(4);
 
@@ -109,7 +109,7 @@ public class LibrarianMenuTest {
         View view = mock(View.class);
         when(view.readLine()).thenReturn("");
         Librarian librarian = mock(Librarian.class);
-        LibrarianMenu librarianMenu = new LibrarianMenu(librarianMenuOptions, view, null, null, librarian);
+        LibrarianMenu librarianMenu = new LibrarianMenu(librarianMenuOptions, view, null, null, librarian, null);
 
         librarianMenu.processOption(5);
 
@@ -121,7 +121,7 @@ public class LibrarianMenuTest {
         View view = mock(View.class);
         when(view.readLine()).thenReturn("");
         Librarian librarian = mock(Librarian.class);
-        LibrarianMenu librarianMenu = new LibrarianMenu(librarianMenuOptions, view, null, null, librarian);
+        LibrarianMenu librarianMenu = new LibrarianMenu(librarianMenuOptions, view, null, null, librarian, null);
 
         librarianMenu.processOption(6);
 
@@ -135,7 +135,7 @@ public class LibrarianMenuTest {
         Librarian librarian = mock(Librarian.class);
         Authenticator authenticator = mock(Authenticator.class);
         when(authenticator.currentUser()).thenReturn(new User("a", "b", 12));
-        LibrarianMenu librarianMenu = new LibrarianMenu(librarianMenuOptions, view, authenticator, null, librarian);
+        LibrarianMenu librarianMenu = new LibrarianMenu(librarianMenuOptions, view, authenticator, null, librarian, null);
 
         librarianMenu.processOption(7);
 
@@ -148,7 +148,7 @@ public class LibrarianMenuTest {
         when(view.readLine()).thenReturn("");
         Librarian librarian = mock(Librarian.class);
         App app = mock(App.class);
-        LibrarianMenu librarianMenu = new LibrarianMenu(librarianMenuOptions, view, null, null, librarian);
+        LibrarianMenu librarianMenu = new LibrarianMenu(librarianMenuOptions, view, null, null, librarian, null);
         librarianMenu.registerApp(app);
 
         librarianMenu.processOption(9);

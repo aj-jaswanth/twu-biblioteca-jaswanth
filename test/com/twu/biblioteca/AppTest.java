@@ -23,6 +23,7 @@ public class AppTest {
     private String[] startMenuOptions = {LIST_BOOKS, LIST_MOVIES, LOGIN, QUIT};
     private String[] userMenuOptions = {LIST_BOOKS, LIST_MOVIES, CHECK_OUT_BOOK, CHECK_OUT_MOVIE, RETURN_BOOK, RETURN_MOVIE, ABOUT_USER, LOGOUT};
     private String[] librarianMenuOptions = {LIST_BOOKS, LIST_MOVIES, CHECK_OUT_BOOK, CHECK_OUT_MOVIE, RETURN_BOOK, RETURN_MOVIE, ABOUT_USER, SHOW_HISTORY, LOGOUT};
+    private CheckOutRegister checkOutRegister = new CheckOutRegister();
 
     @Before
     public void setUp() {
@@ -75,6 +76,31 @@ public class AppTest {
         String actualOutput = outputStream.toString();
 
         assertEquals("Bengaluru public library welcomes you!\n1. List Books\n2. List Movies\n3. Login\n4. Quit\nSelect an option : \nEnter your library Id : \nEnter your password : \n1. List Books\n2. List Movies\n3. Check Out Book\n4. Check Out Movie\n5. Return Book\n6. Return Movie\n7. About you\n8. Logout\n" +
+                "Select an option : \n" +
+                "1. List Books\n" +
+                "2. List Movies\n" +
+                "3. Login\n" +
+                "4. Quit\n" +
+                "Select an option : \n", actualOutput);
+    }
+
+    @Test
+    public void shouldSwitchToLibrarianMenuIfLoggedInAsANormalUser() {
+        ByteArrayInputStream inputContent = new ByteArrayInputStream("3\n123-321\ndwp\n9\n4".getBytes());
+        View view = new View(new Scanner(inputContent));
+        Library library = new Library(view, new ArrayList<Book>(), new ArrayList<Movie>());
+        Authenticator authenticator = new Authenticator(view);
+        StartMenu startMenu = new StartMenu(startMenuOptions, view, authenticator, library, null);
+        UserMenu userMenu = new UserMenu(userMenuOptions, view, authenticator, library, null);
+        LibrarianMenu librarianMenu = new LibrarianMenu(librarianMenuOptions, view, authenticator, library, null, checkOutRegister);
+
+        Menu[] menus = {startMenu, userMenu, librarianMenu};
+        App app = new App(menus, library, null, view);
+
+        app.start();
+        String actualOutput = outputStream.toString();
+
+        assertEquals("Bengaluru public library welcomes you!\n1. List Books\n2. List Movies\n3. Login\n4. Quit\nSelect an option : \nEnter your library Id : \nEnter your password : \n1. List Books\n2. List Movies\n3. Check Out Book\n4. Check Out Movie\n5. Return Book\n6. Return Movie\n7. About you\n8. View checked out items\n9. Logout\n" +
                 "Select an option : \n" +
                 "1. List Books\n" +
                 "2. List Movies\n" +

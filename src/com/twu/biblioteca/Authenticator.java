@@ -11,6 +11,7 @@ public class Authenticator {
     private User currentUser;
     private Map<String, String> idPasswordRegister;
     private Map<String, User> userRegister;
+    private String currentUserId;
 
     public Authenticator(View view) {
         this.view = view;
@@ -30,6 +31,7 @@ public class Authenticator {
         if (libraryId != null) {
             String pwd = idPasswordRegister.get(libraryId);
             if (pwd != null && pwd.equals(password)) {
+                currentUserId = libraryId;
                 currentUser = userRegister.get(libraryId);
                 if (libraryId.equals("123-321"))
                     return 2;
@@ -42,5 +44,9 @@ public class Authenticator {
 
     public User currentUser() {
         return currentUser;
+    }
+
+    public String currentUserId() {
+        return currentUserId;
     }
 }
