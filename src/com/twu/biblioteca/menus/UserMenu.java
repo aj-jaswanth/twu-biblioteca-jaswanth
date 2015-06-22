@@ -1,8 +1,10 @@
-package com.twu.biblioteca;
+package com.twu.biblioteca.menus;
+
+import com.twu.biblioteca.*;
 
 import static com.twu.biblioteca.Messages.*;
 
-public class LibrarianMenu implements Menu {
+public class UserMenu implements Menu {
     private final String[] options;
     private final View view;
     private final Library library;
@@ -10,15 +12,13 @@ public class LibrarianMenu implements Menu {
     private App app;
     private Authenticator authenticator;
     private User currentUser;
-    private CheckOutRegister checkOutRegister;
 
-    public LibrarianMenu(String[] options, View view, Authenticator authenticator, Library library, Librarian librarian, CheckOutRegister checkOutRegister) {
+    public UserMenu(String[] options, View view, Authenticator authenticator, Library library, Librarian librarian) {
         this.options = options;
         this.view = view;
         this.library = library;
         this.librarian = librarian;
         this.authenticator = authenticator;
-        this.checkOutRegister = checkOutRegister;
     }
 
     @Override
@@ -71,9 +71,6 @@ public class LibrarianMenu implements Menu {
                 view.display(authenticator.currentUser() + "");
                 break;
             case 8:
-                view.display(checkOutRegister.toString());
-                break;
-            case 9:
                 app.useStartMenu();
                 break;
         }

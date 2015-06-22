@@ -1,4 +1,6 @@
-package com.twu.biblioteca;
+package com.twu.biblioteca.menus;
+
+import com.twu.biblioteca.*;
 
 import static com.twu.biblioteca.Messages.MENU_SELECT_INVALID;
 import static com.twu.biblioteca.Messages.MENU_SELECT_PROMPT;

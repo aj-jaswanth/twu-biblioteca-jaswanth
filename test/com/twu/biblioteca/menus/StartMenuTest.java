@@ -1,5 +1,8 @@
-package com.twu.biblioteca;
+package com.twu.biblioteca.menus;
 
+import com.twu.biblioteca.Library;
+import com.twu.biblioteca.View;
+import com.twu.biblioteca.menus.StartMenu;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -37,7 +40,7 @@ public class StartMenuTest {
     }
 
     @Test
-    public void shouldReturnMinuOneIfInvalidOptionIsEntered() {
+    public void shouldReturnMinusOneIfInvalidOptionIsEntered() {
         ByteArrayInputStream inputContent = new ByteArrayInputStream("5".getBytes());
         View view = new View(new Scanner(inputContent));
         StartMenu startMenu = new StartMenu(startMenuOptions, view, null, null, null);

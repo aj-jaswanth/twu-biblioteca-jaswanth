@@ -1,5 +1,9 @@
 package com.twu.biblioteca;
 
+import com.twu.biblioteca.menus.LibrarianMenu;
+import com.twu.biblioteca.menus.Menu;
+import com.twu.biblioteca.menus.StartMenu;
+import com.twu.biblioteca.menus.UserMenu;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

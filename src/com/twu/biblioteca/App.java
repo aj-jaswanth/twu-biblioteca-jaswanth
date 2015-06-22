@@ -1,5 +1,7 @@
 package com.twu.biblioteca;
 
+import com.twu.biblioteca.menus.Menu;
+
 import static com.twu.biblioteca.Messages.WELCOME_MESSAGE;
 
 public class App {

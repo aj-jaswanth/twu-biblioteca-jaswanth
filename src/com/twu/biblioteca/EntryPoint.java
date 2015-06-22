@@ -1,5 +1,10 @@
 package com.twu.biblioteca;
 
+import com.twu.biblioteca.menus.LibrarianMenu;
+import com.twu.biblioteca.menus.Menu;
+import com.twu.biblioteca.menus.StartMenu;
+import com.twu.biblioteca.menus.UserMenu;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;

@@ -1,5 +1,7 @@
-package com.twu.biblioteca;
+package com.twu.biblioteca.menus;
 
+import com.twu.biblioteca.*;
+import com.twu.biblioteca.menus.LibrarianMenu;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -14,9 +16,9 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.*;
 
-public class UserMenuTest {
+public class LibrarianMenuTest {
 
-    private String[] userMenuOptions = new String[]{LIST_BOOKS, LIST_MOVIES, LOGIN, QUIT};
+    private String[] librarianMenuOptions = new String[]{LIST_BOOKS, LIST_MOVIES, LOGIN, QUIT};
     private ByteArrayOutputStream outputStream;
 
     @Before
@@ -29,9 +31,9 @@ public class UserMenuTest {
     public void shouldReturnSelectedOptionIfValid() {
         ByteArrayInputStream inputContent = new ByteArrayInputStream("4".getBytes());
         View view = new View(new Scanner(inputContent));
-        UserMenu userMenu = new UserMenu(userMenuOptions, view, null, null, null);
+        LibrarianMenu librarianMenu = new LibrarianMenu(librarianMenuOptions, view, null, null, null, null);
 
-        int actualOption = userMenu.selectedOption();
+        int actualOption = librarianMenu.selectedOption();
 
         assertThat(actualOption, is(4));
     }
@@ -40,9 +42,9 @@ public class UserMenuTest {
     public void shouldReturnMinuOneIfInvalidOptionIsEntered() {
         ByteArrayInputStream inputContent = new ByteArrayInputStream("15".getBytes());
         View view = new View(new Scanner(inputContent));
-        UserMenu userMenu = new UserMenu(userMenuOptions, view, null, null, null);
+        LibrarianMenu librarianMenu = new LibrarianMenu(librarianMenuOptions, view, null, null, null, null);
 
-        int actualOption = userMenu.selectedOption();
+        int actualOption = librarianMenu.selectedOption();
 
         assertThat(actualOption, is(-1));
     }
@@ -51,9 +53,9 @@ public class UserMenuTest {
     public void shouldDisplayOptions() {
         ByteArrayInputStream inputContent = new ByteArrayInputStream("4".getBytes());
         View view = new View(new Scanner(inputContent));
-        UserMenu userMenu = new UserMenu(userMenuOptions, view, null, null, null);
+        LibrarianMenu librarianMenu = new LibrarianMenu(librarianMenuOptions, view, null, null, null, null);
 
-        int actualOption = userMenu.selectedOption();
+        int actualOption = librarianMenu.selectedOption();
 
         assertThat(actualOption, is(4));
     }
@@ -61,9 +63,9 @@ public class UserMenuTest {
     @Test
     public void shouldDisplayAvailableBooks() {
         Library library = mock(Library.class);
-        UserMenu userMenu = new UserMenu(userMenuOptions, null, null, library, null);
+        LibrarianMenu librarianMenu = new LibrarianMenu(librarianMenuOptions, null, null, library, null, null);
 
-        userMenu.processOption(1);
+        librarianMenu.processOption(1);
 
         verify(library, times(1)).displayAvailableBooks();
     }
@@ -72,10 +74,10 @@ public class UserMenuTest {
     public void shouldDisplayAvailableMovies() {
         View view = mock(View.class);
         Library library = mock(Library.class);
-        UserMenu userMenu = new UserMenu(userMenuOptions, view, null, library, null);
+        LibrarianMenu librarianMenu = new LibrarianMenu(librarianMenuOptions, view, null, library, null, null);
         when(view.readLine()).thenReturn("");
 
-        userMenu.processOption(2);
+        librarianMenu.processOption(2);
 
         verify(library, times(1)).displayAvailableMovies();
     }
@@ -85,9 +87,9 @@ public class UserMenuTest {
         View view = mock(View.class);
         when(view.readLine()).thenReturn("");
         Librarian librarian = mock(Librarian.class);
-        UserMenu userMenu = new UserMenu(userMenuOptions, view, null, null, librarian);
+        LibrarianMenu librarianMenu = new LibrarianMenu(librarianMenuOptions, view, null, null, librarian, null);
 
-        userMenu.processOption(3);
+        librarianMenu.processOption(3);
 
         verify(librarian, times(1)).checkOutBook("");
     }
@@ -97,9 +99,9 @@ public class UserMenuTest {
         View view = mock(View.class);
         when(view.readLine()).thenReturn("");
         Librarian librarian = mock(Librarian.class);
-        UserMenu userMenu = new UserMenu(userMenuOptions, view, null, null, librarian);
+        LibrarianMenu librarianMenu = new LibrarianMenu(librarianMenuOptions, view, null, null, librarian, null);
 
-        userMenu.processOption(4);
+        librarianMenu.processOption(4);
 
         verify(librarian, times(1)).checkOutMovie("");
     }
@@ -109,9 +111,9 @@ public class UserMenuTest {
         View view = mock(View.class);
         when(view.readLine()).thenReturn("");
         Librarian librarian = mock(Librarian.class);
-        UserMenu userMenu = new UserMenu(userMenuOptions, view, null, null, librarian);
+        LibrarianMenu librarianMenu = new LibrarianMenu(librarianMenuOptions, view, null, null, librarian, null);
 
-        userMenu.processOption(5);
+        librarianMenu.processOption(5);
 
         verify(librarian, times(1)).returnBook("");
     }
@@ -121,23 +123,23 @@ public class UserMenuTest {
         View view = mock(View.class);
         when(view.readLine()).thenReturn("");
         Librarian librarian = mock(Librarian.class);
-        UserMenu userMenu = new UserMenu(userMenuOptions, view, null, null, librarian);
+        LibrarianMenu librarianMenu = new LibrarianMenu(librarianMenuOptions, view, null, null, librarian, null);
 
-        userMenu.processOption(6);
+        librarianMenu.processOption(6);
 
         verify(librarian, times(1)).returnMovie("");
     }
 
     @Test
-    public void shouldDisplayCurrentUser() {
+    public void shouldDisplayCurrentLibrarian() {
         View view = mock(View.class);
         when(view.readLine()).thenReturn("");
         Librarian librarian = mock(Librarian.class);
         Authenticator authenticator = mock(Authenticator.class);
         when(authenticator.currentUser()).thenReturn(new User("a", "b", 12));
-        UserMenu userMenu = new UserMenu(userMenuOptions, view, authenticator, null, librarian);
+        LibrarianMenu librarianMenu = new LibrarianMenu(librarianMenuOptions, view, authenticator, null, librarian, null);
 
-        userMenu.processOption(7);
+        librarianMenu.processOption(7);
 
         verify(authenticator, times(1)).currentUser();
     }
@@ -148,10 +150,10 @@ public class UserMenuTest {
         when(view.readLine()).thenReturn("");
         Librarian librarian = mock(Librarian.class);
         App app = mock(App.class);
-        UserMenu userMenu = new UserMenu(userMenuOptions, view, null, null, librarian);
-        userMenu.registerApp(app);
+        LibrarianMenu librarianMenu = new LibrarianMenu(librarianMenuOptions, view, null, null, librarian, null);
+        librarianMenu.registerApp(app);
 
-        userMenu.processOption(8);
+        librarianMenu.processOption(9);
 
         verify(app, times(1)).useStartMenu();
     }
